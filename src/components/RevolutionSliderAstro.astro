@@ -1,7 +1,6 @@
 ---
 // src/components/RevolutionSliderAstro.astro
 import { Image } from 'astro:assets';
-import { getAbsoluteUrl } from '../utils/helpers';
 ---
 
 <div class="revolution-slider-container">
@@ -9,7 +8,7 @@ import { getAbsoluteUrl } from '../utils/helpers';
         <div class="slide-background"></div>
 
         <Image
-            src={getAbsoluteUrl('/content/corporate-03.png')}
+            src={'/content/corporate-03.png'}
             alt="Corporate Image 1"
             class="slider-layer layer-1"
             width={1408}
@@ -20,7 +19,7 @@ import { getAbsoluteUrl } from '../utils/helpers';
         />
 
         <Image
-            src={getAbsoluteUrl('/content/corporate-02.png')}
+            src={'/content/corporate-02.png'}
             alt="Corporate Image 2"
             class="slider-layer layer-2"
             width={1196}
@@ -31,7 +30,7 @@ import { getAbsoluteUrl } from '../utils/helpers';
         />
 
         <Image
-            src={getAbsoluteUrl('/content/arrow-black-01.png')}
+            src={'/content/arrow-black-01.png'}
             alt="Arrow Black"
             class="slider-layer layer-3"
             width={129}
@@ -42,7 +41,7 @@ import { getAbsoluteUrl } from '../utils/helpers';
         />
 
         <Image
-            src={getAbsoluteUrl('/content/arrow-red-01.png')}
+            src={'/content/arrow-red-01.png'}
             alt="Arrow Red"
             class="slider-layer layer-4"
             width={128}
@@ -53,7 +52,7 @@ import { getAbsoluteUrl } from '../utils/helpers';
         />
 
         <Image
-            src={getAbsoluteUrl('/content/logo-rows-05.png')}
+            src={'/content/logo-rows-05.png'}
             alt="Logo Rows"
             class="slider-layer layer-5"
             width={225}
@@ -64,7 +63,7 @@ import { getAbsoluteUrl } from '../utils/helpers';
         />
 
         <Image
-            src={getAbsoluteUrl('/content/consultoratexto-06.png')}
+            src={'/content/consultoratexto-06.png'}
             alt="Consultora Texto"
             class="slider-layer layer-6"
             width={632}
