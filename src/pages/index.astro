@@ -1,11 +1,132 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import NavMenu from '../components/NavMenu.astro';
+import RevolutionSliderAstro from '../components/RevolutionSliderAstro.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Consultora Bis - Business Intelligence Services" description="Consultora Bis, tu socio estratégico en Paraguay para el desarrollo y consolidación empresarial. Servicios de asesoramiento financiero, estrategia, investigación y más.">
+    <header class="bg-white text-white p-4 shadow-md sticky top-0 z-50 w-full">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="/" class="flex items-center">
+                    <img src="/logo.png" alt="Logo Consultora Bis" class="h-10 mr-3" loading="lazy" />
+                </a>
+            </div>
+            <NavMenu />
+        </div>
+    </header>
+	<RevolutionSliderAstro />
+    <main class="flex-grow w-full">
+        <section class="bg-gradient-to-r from-logo-principal to-logo-secundario text-white py-20 px-4 text-center w-full">
+            <div class="container mx-auto">
+                <h2 class="text-logo-acento text-4xl md:text-5xl font-extrabold mb-4 animate-fade-in-down">
+                    Transformando datos en decisiones. <br> Impulsando tu crecimiento empresarial.
+                </h2>
+                <p class="text-xl md:text-2xl opacity-90 animate-fade-in-up">
+                    Tu Socio Estratégico en Paraguay.
+                </p>
+            </div>
+        </section>
+
+        <section id="quienes-somos" class="py-16 px-4 bg-white w-full border-b border-gray-100">
+			<div class="container mx-auto max-w-6xl">
+				<h2 class="text-logo-secundario text-3xl font-bold text-center text-blue-800 mb-8">Quiénes Somos</h2>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+					<div class="px-6 md:py-6">
+						<h3 class="text-2xl font-semibold text-logo-secundario mb-3">Consultora Bis</h3>
+						<p class="text-gray-700">
+							Nace de la visión de jóvenes profesionales de las ciencias económicas, apasionados por el mundo de los negocios. Nuestro objetivo es claro: brindar servicios de asesoramiento empresarial y financiero especializado, capitalizando la experiencia y las diversas áreas de especialidad de nuestro equipo.
+						</p>
+					</div>
+					<div class="px-6 md:py-6">
+						<h3 class="text-2xl font-semibold text-logo-secundario mb-3">Nuestra Misión</h3>
+						<p class="text-gray-700">
+							Brindar servicios que permitan el <strong class="text-logo-secundario">desarrollo y consolidación empresarial</strong> de nuestros clientes. Lo hacemos a través de un equipo especializado, enfocado en generar <strong class="text-logo-secundario">soluciones eficaces e innovadoras</strong> que se adapten a tus necesidades.
+						</p>
+					</div>
+					<div class="px-6 md:pt-6">
+						<h3 class="text-2xl font-semibold text-logo-secundario mb-3">Nuestra Visión</h3>
+						<p class="text-gray-700">
+							Convertirnos en <strong class="text-logo-secundario">referentes en el ámbito de la consultoría</strong> en estrategia y gestión empresarial en Paraguay, siempre comprometidos con el desarrollo y éxito de nuestros clientes.
+						</p>
+					</div>
+				</div>
+			</div>
+        </section>
+
+        <section id="servicios" class="py-16 px-4 bg-gradient-to-r from-logo-principal to-logo-secundario text-white w-full border-b border-gray-100">
+			<div class="container mx-auto max-w-4xl">
+				<h2 class="text-logo-acento text-3xl font-bold text-center mb-10">Nuestros Servicios</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+					<div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+						<h3 class="text-xl font-semibold text-logo-secundario mb-2">ASESORAMIENTO FINANCIERO</h3>
+						<p class="text-gray-700">
+							Gestión de inversiones y <em>wealth management</em>. Modelación financiera avanzada. Análisis sectoriales y específicos para decisiones informadas.
+						</p>
+					</div>
+					<div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+						<h3 class="text-xl font-semibold text-logo-secundario mb-2">ASESORAMIENTO EN ESTRATEGIA EMPRESARIAL</h3>
+						<p class="text-gray-700">
+							Diseñamos estructuras innovadoras que te brindan un amplio abanico de posibilidades, ayudándote a tomar las decisiones correctas para el futuro de tu empresa.
+						</p>
+					</div>
+					<div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+						<h3 class="text-xl font-semibold text-logo-secundario mb-2">INVESTIGACIÓN</h3>
+						<p class="text-gray-700">
+							Desarrollamos informes detallados que presentan las situaciones actuales y las perspectivas de los principales sectores económicos. Nuestro objetivo es caracterizar las tendencias clave y los ciclos económicos para que estés siempre un paso adelante.
+						</p>
+					</div>
+					<div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+						<h3 class="text-xl font-semibold text-logo-secundario mb-2">ELABORACIÓN Y EVALUACIÓN DE PROYECTOS</h3>
+						<p class="text-gray-700">
+							Te asesoramos en la formulación, evaluación y gestión de proyectos de inversión. Nuestro respaldo es un sólido conocimiento de la realidad macroeconómica del país y de las ventajas comparativas de Paraguay.
+						</p>
+					</div>
+					<div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+						<h3 class="text-xl font-semibold text-logo-secundario mb-2">ESTUDIOS DE MERCADO</h3>
+						<p class="text-gray-700">
+							Determinamos las características de mercados desarrollados y en prospección, identificando riesgos y oportunidades cruciales para tu expansión.
+						</p>
+					</div>
+					<div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+						<h3 class="text-xl font-semibold text-logo-secundario mb-2">CAPACITACIÓN</h3>
+						<p class="text-gray-700">
+							Ofrecemos capacitación en el manejo de TICs relacionadas con la estadística y las finanzas. Además, contamos con programas de actualización en economía y negocios para mantenerte competitivo.
+						</p>
+					</div>
+				</div>
+			</div>
+        </section>
+
+        <section id="contactanos" class="py-16 px-4 bg-white mx-auto max-w-4xl mt-10 mb-10 text-center">
+            <h2 class="text-logo-secundario  text-3xl font-bold text-logo-secundario mb-6">Contáctanos</h2>
+            <p class="text-lg text-gray-700 mb-8">
+                ¿Listo para llevar tu negocio al siguiente nivel? Contáctanos hoy mismo para una consulta personalizada.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
+                <a href="mailto:info@consultorabis.com" class="bg-gradient-to-r from-logo-principal to-logo-secundario hover:bg-logo-acento-darker text-white px-8 py-3 rounded-full text-lg font-semibold transition duration-300 flex items-center">
+                    <img src="icons8-mail-50-white.png" alt="mail" class="w-8 h-8 mr-2" />
+					info@consultorabis.com
+                </a>
+                <a href="tel:+595XXXXXXXXX" class="bg-gradient-to-r from-logo-principal to-logo-secundario hover:bg-logo-acento-darker text-white px-8 py-3 rounded-full text-lg font-semibold transition duration-300 flex items-center">
+                    <img src="icons8-phone-50-white.png" alt="phone" class="w-8 h-8 mr-2" />
+                    +595 XXXXXXXXX
+                </a>
+                </div>
+        </section>
+    </main>
+
+    <footer class="bg-logo-secundario text-white py-8 px-4 mt-auto">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="mb-4 md:mb-0">&copy; {new Date().getFullYear()} Consultora Bis. Todos los derechos reservados.</p>
+            <div class="flex space-x-6">
+                <a href="https://wa.me/595XXXXXXXXX" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-400 transition-colors duration-300 flex items-center">
+                    <img src="/icons8-whatsapp.svg" alt="WhatsApp" class="w-8 h-8 mr-2 icon" /> WhatsApp
+                </a>
+                <a href="https://www.linkedin.com/company/tu-empresa/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-blue-300 transition-colors duration-300 flex items-center">
+                    <img src="/icons8-linkedin.svg" alt="LinkedIn" class="w-8 h-8 mr-2 icon" /> LinkedIn
+                </a>
+                </div>
+        </div>
+    </footer>
 </Layout>

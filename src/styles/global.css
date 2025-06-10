@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos personalizados para un diseño minimalista y fluido */
+html {
+    scroll-behavior: smooth;
+    /* Asegura que el scroll sea fluido */
+}
+
+body {
+    font-family: theme('fontFamily.body'); /* Source Sans Pro para el cuerpo */
+    @apply text-gray-800 antialiased; /* antialiased para texto más suave */
+}
+
+a {
+    font-family: theme('fontFamily.heading'); /* Open Sans para encabezados */
+    @apply text-logo-principal;
+    font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: theme('fontFamily.heading'); /* Open Sans para encabezados */
+    @apply text-logo-principal; 
+}
+
+/* Eliminar sombras y bordes por defecto si no son deseados en elementos comunes */
+/* Esto sobrescribe los estilos por defecto de Tailwind para elementos como botones o inputs si los agregas */
+.shadow-md, .shadow-lg, .shadow-xl {
+    box-shadow: none !important; /* Fuerza la eliminación de sombras */
+}
+
+.rounded-lg {
+    border-radius: 0 !important; /* Elimina bordes redondeados si buscas un look muy rectilíneo */
+}
+
+/* Ajuste para el scroll en los anclajes del menú, considerando un header fijo */
+section {
+    scroll-margin-top: 80px; /* Ajusta según la altura de tu header para que el anclaje no quede debajo */
+}
+
+/* Clases utilitarias personalizadas si las necesitas, por ejemplo, para bordes sutiles */
+.border-b-subtle {
+    border-bottom: 1px solid theme('colors.gray.200'); /* Un borde inferior muy sutil */
+}
+
+.icon svg {
+  fill: white;
+}

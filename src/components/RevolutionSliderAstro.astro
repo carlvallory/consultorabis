@@ -1,0 +1,314 @@
+---
+// src/components/RevolutionSliderAstro.astro
+import { Image } from 'astro:assets';
+import { getAbsoluteUrl } from '../utils/helpers';
+---
+
+<div class="revolution-slider-container">
+    <div class="slider-wrapper" id="single-slider-wrapper">
+        <div class="slide-background"></div>
+
+        <Image
+            src={getAbsoluteUrl('/content/corporate-03.png')}
+            alt="Corporate Image 1"
+            class="slider-layer layer-1"
+            width={1408}
+            height={174}
+            loading="eager"
+            densities={[1, 1.5, 2]}
+            formats={['webp', 'avif', 'png']}
+        />
+
+        <Image
+            src={getAbsoluteUrl('/content/corporate-02.png')}
+            alt="Corporate Image 2"
+            class="slider-layer layer-2"
+            width={1196}
+            height={160}
+            loading="eager"
+            densities={[1, 1.5, 2]}
+            formats={['webp', 'avif', 'png']}
+        />
+
+        <Image
+            src={getAbsoluteUrl('/content/arrow-black-01.png')}
+            alt="Arrow Black"
+            class="slider-layer layer-3"
+            width={129}
+            height={367}
+            loading="eager"
+            densities={[1, 1.5, 2]}
+            formats={['webp', 'avif', 'png']}
+        />
+
+        <Image
+            src={getAbsoluteUrl('/content/arrow-red-01.png')}
+            alt="Arrow Red"
+            class="slider-layer layer-4"
+            width={128}
+            height={152}
+            loading="eager"
+            densities={[1, 1.5, 2]}
+            formats={['webp', 'avif', 'png']}
+        />
+
+        <Image
+            src={getAbsoluteUrl('/content/logo-rows-05.png')}
+            alt="Logo Rows"
+            class="slider-layer layer-5"
+            width={225}
+            height={232}
+            loading="eager"
+            densities={[1, 1.5, 2]}
+            formats={['webp', 'avif', 'png']}
+        />
+
+        <Image
+            src={getAbsoluteUrl('/content/consultoratexto-06.png')}
+            alt="Consultora Texto"
+            class="slider-layer layer-6"
+            width={632}
+            height={142}
+            loading="eager"
+            densities={[1, 1.5, 2]}
+            formats={['webp', 'avif', 'png']}
+        />
+    </div>
+</div>
+
+<style>
+    .revolution-slider-container {
+        position: relative;
+        width: 100%; /* Por defecto, ocupa todo el ancho */
+        max-width: 1920px; /* Límite de ancho para pantallas grandes */
+        height: auto; /* La altura se ajustará automáticamente */
+        aspect-ratio: 1920 / 775; /* Mantiene la proporción de 1920x775 */
+        margin: 0 auto; /* Centra el slider si el viewport es más grande que 1920px */
+        overflow: hidden;
+        /* Variables de referencia para los cálculos de GSAP */
+        --base-width: 1920px; /* NUEVA ANCHO DE REFERENCIA */
+        --base-height: 775px; /* NUEVA ALTURA DE REFERENCIA */
+    }
+
+    .slider-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .slide-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        z-index: 1;
+    }
+
+    .slider-layer {
+        position: absolute;
+        opacity: 0;
+        z-index: 2;
+        transform-origin: center center;
+    }
+
+    /* Z-index específicos de Revolution Slider para superposición */
+    .layer-1 { z-index: 5; }
+    .layer-2 { z-index: 6; }
+    .layer-3 { z-index: 7; }
+    .layer-4 { z-index: 8; }
+    .layer-5 { z-index: 9; }
+    .layer-6 { z-index: 10; }
+
+</style>
+
+<script>
+    import { gsap } from 'gsap';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const sliderContainer = document.querySelector('.revolution-slider-container');
+        if (!sliderContainer) return;
+
+        // Se obtienen las variables CSS para el tamaño base del diseño
+        const baseWidth = parseFloat(getComputedStyle(sliderContainer).getPropertyValue('--base-width'));
+        const baseHeight = parseFloat(getComputedStyle(sliderContainer).getPropertyValue('--base-height'));
+
+        // Función para calcular la posición y tamaño responsivos
+        const getResponsiveValue = (value, isWidth) => {
+            const currentContainerWidth = sliderContainer.offsetWidth;
+            const currentContainerHeight = sliderContainer.offsetHeight;
+
+            if (isWidth) {
+                return (value / baseWidth) * currentContainerWidth;
+            } else {
+                return (value / baseHeight) * currentContainerHeight;
+            }
+        };
+
+        const animateSlider = () => {
+            gsap.killTweensOf(".slider-layer");
+            gsap.set(".slider-layer", { opacity: 0 });
+
+            const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+
+            // Anchos y altos originales de las imágenes para cálculos de superposición/posición
+            const layer1OriginalWidth = 1408;
+            const layer1OriginalHeight = 174;
+            const layer2OriginalWidth = 1196;
+            const layer2OriginalHeight = 160;
+            const layer3OriginalWidth = 129;
+            const layer3OriginalHeight = 367;
+            const layer4OriginalWidth = 128;
+            const layer4OriginalHeight = 152;
+            const layer5OriginalWidth = 225;
+            const layer5OriginalHeight = 232;
+            const layer6OriginalWidth = 632;
+            const layer6OriginalHeight = 142;
+
+            // --- ANIMACIONES DE CAPAS SUPERIORES (corporate-02.png y corporate-03.png) ---
+
+            const layer2Overlap = layer2OriginalWidth * 0.90;
+            const layer2FinalX = -layer2OriginalWidth + layer2Overlap;
+            const layer2FinalY = 0;
+
+            tl.fromTo(".layer-2",
+                {
+                    x: getResponsiveValue(-layer2OriginalWidth, true),
+                    y: getResponsiveValue(layer2FinalY, false),
+                    width: getResponsiveValue(layer2OriginalWidth, true),
+                    height: getResponsiveValue(layer2OriginalHeight, false),
+                    opacity: 1,
+                },
+                {
+                    x: getResponsiveValue(layer2FinalX, true),
+                    duration: 1.5,
+                    delay: 0.5
+                }, 0
+            );
+
+            const layer1Overlap = layer1OriginalWidth * 0.90;
+            const layer1FinalX = baseWidth - layer1Overlap;
+            const layer1FinalY = 0;
+
+            tl.fromTo(".layer-1",
+                {
+                    x: getResponsiveValue(baseWidth, true),
+                    y: getResponsiveValue(layer1FinalY, false),
+                    width: getResponsiveValue(layer1OriginalWidth, true),
+                    height: getResponsiveValue(layer1OriginalHeight, false),
+                    opacity: 1,
+                },
+                {
+                    x: getResponsiveValue(layer1FinalX, true),
+                    duration: 1.5,
+                    delay: 0.5
+                }, 0
+            );
+
+
+            // --- ANIMACIONES CENTRALES (arrow-black-01.png, arrow-red-01.png, logo-rows-05.png) ---
+
+            const getCenteredXPos = (layerWidth) => {
+                const currentContainerWidth = sliderContainer.offsetWidth;
+                return (currentContainerWidth / 2) - (getResponsiveValue(layerWidth, true) / 2);
+            };
+
+            const layer3CenteredX = getCenteredXPos(layer3OriginalWidth);
+            const layer3FinalY = (baseHeight / 1.15) - layer3OriginalHeight;
+
+            tl.fromTo(".layer-3",
+                {
+                    y: getResponsiveValue(baseHeight, false),
+                    x: layer3CenteredX,
+                    width: getResponsiveValue(layer3OriginalWidth, true),
+                    height: getResponsiveValue(layer3OriginalHeight, false),
+                    opacity: 0,
+                },
+                {
+                    y: getResponsiveValue(layer3FinalY, false),
+                    opacity: 1,
+                    duration: 1.5,
+                    delay: 2.0
+                }
+            )
+            .to(".layer-3", {
+                opacity: 0,
+                duration: 0.5,
+                delay: 0.5
+            });
+
+            const getCenteredPos = (layerWidth, layerHeight) => {
+                const currentContainerWidth = sliderContainer.offsetWidth;
+                const currentContainerHeight = sliderContainer.offsetHeight;
+                const finalX = (currentContainerWidth / 2) - (getResponsiveValue(layerWidth, true) / 2);
+                const finalY = (currentContainerHeight / 2) - (getResponsiveValue(layerHeight, false) / 2);
+                return { x: finalX, y: finalY };
+            };
+
+            const layer4CenteredPos = getCenteredPos(layer4OriginalWidth, layer4OriginalHeight);
+
+            tl.fromTo(".layer-4",
+                {
+                    y: layer4CenteredPos.y,
+                    x: layer4CenteredPos.x,
+                    width: getResponsiveValue(layer4OriginalWidth, true),
+                    height: getResponsiveValue(layer4OriginalHeight, false),
+                    opacity: 0,
+                },
+                {
+                    opacity: 1,
+                    duration: 0.88,
+                    delay: "<"
+                }
+            );
+
+            const layer5CenteredPos = getCenteredPos(layer5OriginalWidth, layer5OriginalHeight);
+
+            tl.fromTo(".layer-5",
+                {
+                    y: layer5CenteredPos.y,
+                    x: layer5CenteredPos.x,
+                    width: getResponsiveValue(layer5OriginalWidth, true),
+                    height: getResponsiveValue(layer5OriginalHeight, false),
+                    opacity: 0,
+                },
+                {
+                    opacity: 1,
+                    duration: 0.92,
+                    delay: "<0.5"
+                }
+            );
+
+            // --- ANIMACIÓN DEL TEXTO (consultoratexto-06.png) ---
+
+            const layer6FinalY = baseHeight - (layer6OriginalHeight * 1.5);
+            const layer6CenteredX = getCenteredXPos(layer6OriginalWidth);
+
+            tl.fromTo(".layer-6",
+                {
+                    y: getResponsiveValue(layer6FinalY, false),
+                    x: layer6CenteredX,
+                    width: getResponsiveValue(layer6OriginalWidth, true),
+                    height: getResponsiveValue(layer6OriginalHeight, false),
+                    opacity: 0,
+                },
+                {
+                    opacity: 1,
+                    duration: 1,
+                    delay: "<0.5"
+                }
+            );
+        };
+
+        // Recalcular posiciones en resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                animateSlider();
+            }, 250);
+        });
+
+        // Ejecutar la animación al cargar
+        animateSlider();
+    });
+</script>
