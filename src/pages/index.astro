@@ -71,7 +71,7 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 						>
 							<!-- Slide 1: Consultora Bis -->
 							<div
-								class="slide w-full flex-shrink-0 px-6 md:px-12 py-6 text-center"
+								class="slide w-full flex-shrink-0 px-6 md:px-16 py-6 text-center"
 							>
 								<h3
 									class="text-2xl font-semibold text-logo-secundario mb-3"
@@ -91,7 +91,7 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 
 							<!-- Slide 2: Nuestra Misión -->
 							<div
-								class="slide w-full flex-shrink-0 px-6 md:px-12 py-6 text-center"
+								class="slide w-full flex-shrink-0 px-6 md:px-16 py-6 text-center"
 							>
 								<h3
 									class="text-2xl font-semibold text-logo-secundario mb-3"
@@ -112,7 +112,7 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 
 							<!-- Slide 3: Nuestra Visión -->
 							<div
-								class="slide w-full flex-shrink-0 px-6 md:px-12 py-6 text-center"
+								class="slide w-full flex-shrink-0 px-6 md:px-16 py-6 text-center"
 							>
 								<h3
 									class="text-2xl font-semibold text-logo-secundario mb-3"
@@ -134,7 +134,7 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 
 					<!-- Navigation Arrows -->
 					<button
-						class="slider-prev absolute left-0 top-1/2 -translate-y-1/2 bg-logo-principal hover:bg-logo-secundario text-white p-3 rounded-full transition-colors duration-300 z-10"
+						class="slider-prev hidden md:block absolute left-0 top-1/2 -translate-y-1/2 bg-logo-principal hover:bg-logo-secundario text-white p-3 rounded-full transition-colors duration-300 z-10"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +151,7 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 						</svg>
 					</button>
 					<button
-						class="slider-next absolute right-0 top-1/2 -translate-y-1/2 bg-logo-principal hover:bg-logo-secundario text-white p-3 rounded-full transition-colors duration-300 z-10"
+						class="slider-next hidden md:block absolute right-0 top-1/2 -translate-y-1/2 bg-logo-principal hover:bg-logo-secundario text-white p-3 rounded-full transition-colors duration-300 z-10"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -196,6 +196,9 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 					const nextButton = section.querySelector(".slider-next");
 					const dots = section.querySelectorAll(".slider-dot");
 
+					let autoPlayInterval = null;
+					const isMobile = window.innerWidth < 768; // md breakpoint
+
 					console.log("Slider elements:", {
 						sliderWrapper,
 						slides: slides.length,
@@ -237,6 +240,20 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 						updateSlider();
 					}
 
+					function startAutoPlay() {
+						if (autoPlayInterval) return; // Ya está corriendo
+						console.log("Starting auto-play");
+						autoPlayInterval = setInterval(nextSlide, 5000);
+					}
+
+					function stopAutoPlay() {
+						if (autoPlayInterval) {
+							console.log("Stopping auto-play");
+							clearInterval(autoPlayInterval);
+							autoPlayInterval = null;
+						}
+					}
+
 					function prevSlide() {
 						console.log(
 							"Prev slide clicked, current:",
@@ -255,11 +272,19 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 
 					// Event listeners
 					if (prevButton) {
-						prevButton.addEventListener("click", prevSlide);
+						prevButton.addEventListener("click", function () {
+							stopAutoPlay(); // Detener auto-play si hace clic en prev
+							prevSlide();
+						});
 						console.log("Prev button listener added");
 					}
 					if (nextButton) {
-						nextButton.addEventListener("click", nextSlide);
+						nextButton.addEventListener("click", function () {
+							nextSlide();
+							if (!isMobile && !autoPlayInterval) {
+								startAutoPlay(); // Iniciar auto-play en desktop después del primer clic
+							}
+						});
 						console.log("Next button listener added");
 					}
 
@@ -268,8 +293,11 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 					});
 					console.log("Dot listeners added");
 
-					// Auto-play (optional - uncomment to enable)
-					// setInterval(nextSlide, 5000);
+					// Auto-play en mobile siempre
+					if (isMobile) {
+						console.log("Mobile detected - starting auto-play");
+						startAutoPlay();
+					}
 				});
 			</script>
 		</section>
