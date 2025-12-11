@@ -542,11 +542,13 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 								sliderWrapper.parentElement.offsetWidth;
 							translateValue = -(currentSlide * containerWidth);
 						} else {
-							// En desktop: usar el ancho del slide + gap
+							// En desktop: mover de 3 en 3 slides
 							const slideWidth = slides[0].offsetWidth;
 							const gap = 32; // 2rem = 32px gap
+							// Multiplicar por 3 para saltar 3 slides completos
 							translateValue = -(
 								currentSlide *
+								3 *
 								(slideWidth + gap)
 							);
 						}
