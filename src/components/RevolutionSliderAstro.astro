@@ -1,6 +1,6 @@
 ---
 // src/components/RevolutionSliderAstro.astro
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 ---
 
 <div class="revolution-slider-container">
@@ -8,69 +8,69 @@ import { Image } from 'astro:assets';
         <div class="slide-background"></div>
 
         <Image
-            src={'/content/corporate-03.png'}
+            src={"/content/corporate-03.png"}
             alt="Corporate Image 1"
             class="slider-layer layer-1"
             width={1408}
             height={174}
             loading="eager"
             densities={[1, 1.5, 2]}
-            formats={['webp', 'avif', 'png']}
+            formats={["webp", "avif", "png"]}
         />
 
         <Image
-            src={'/content/corporate-02.png'}
+            src={"/content/corporate-02.png"}
             alt="Corporate Image 2"
             class="slider-layer layer-2"
             width={1196}
             height={160}
             loading="eager"
             densities={[1, 1.5, 2]}
-            formats={['webp', 'avif', 'png']}
+            formats={["webp", "avif", "png"]}
         />
 
         <Image
-            src={'/content/arrow-black-01.png'}
+            src={"/content/arrow-black-01.png"}
             alt="Arrow Black"
             class="slider-layer layer-3"
             width={129}
             height={367}
             loading="eager"
             densities={[1, 1.5, 2]}
-            formats={['webp', 'avif', 'png']}
+            formats={["webp", "avif", "png"]}
         />
 
         <Image
-            src={'/content/arrow-red-01.png'}
+            src={"/content/arrow-red-01.png"}
             alt="Arrow Red"
             class="slider-layer layer-4"
             width={128}
             height={152}
             loading="eager"
             densities={[1, 1.5, 2]}
-            formats={['webp', 'avif', 'png']}
+            formats={["webp", "avif", "png"]}
         />
 
         <Image
-            src={'/content/logo-rows-05.png'}
+            src={"/content/logo-rows-05.png"}
             alt="Logo Rows"
             class="slider-layer layer-5"
             width={225}
             height={232}
             loading="eager"
             densities={[1, 1.5, 2]}
-            formats={['webp', 'avif', 'png']}
+            formats={["webp", "avif", "png"]}
         />
 
         <Image
-            src={'/content/consultoratexto-06.png'}
+            src={"/content/consultoratexto-06.png"}
             alt="Consultora Texto"
             class="slider-layer layer-6"
             width={632}
             height={142}
             loading="eager"
             densities={[1, 1.5, 2]}
-            formats={['webp', 'avif', 'png']}
+            formats={["webp", "avif", "png"]}
         />
     </div>
 </div>
@@ -78,15 +78,27 @@ import { Image } from 'astro:assets';
 <style>
     .revolution-slider-container {
         position: relative;
-        width: 100%; /* Por defecto, ocupa todo el ancho */
-        max-width: 1920px; /* Límite de ancho para pantallas grandes */
-        height: auto; /* La altura se ajustará automáticamente */
-        aspect-ratio: 1920 / 775; /* Mantiene la proporción de 1920x775 */
-        margin: 0 auto; /* Centra el slider si el viewport es más grande que 1920px */
+        width: 100%;
+        max-width: 1920px;
+        height: auto;
+        /* Aspect ratio más bajo en mobile para evitar que sea demasiado alto */
+        aspect-ratio: 16 / 9;
+        margin: 0 auto;
         overflow: hidden;
         /* Variables de referencia para los cálculos de GSAP */
-        --base-width: 1920px; /* NUEVA ANCHO DE REFERENCIA */
-        --base-height: 775px; /* NUEVA ALTURA DE REFERENCIA */
+        --base-width: 1920px;
+        --base-height: 775px;
+        /* Altura mínima y máxima para evitar distorsión */
+        min-height: 300px;
+        max-height: 800px;
+    }
+
+    /* En desktop, usar el aspect ratio original */
+    @media (min-width: 768px) {
+        .revolution-slider-container {
+            aspect-ratio: 1920 / 775;
+            min-height: 400px;
+        }
     }
 
     .slider-wrapper {
@@ -108,28 +120,50 @@ import { Image } from 'astro:assets';
         opacity: 0;
         z-index: 2;
         transform-origin: center center;
+        /* Prevenir distorsión de imágenes */
+        object-fit: contain;
+        /* Asegurar que las imágenes mantengan su calidad */
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
     }
 
     /* Z-index específicos de Revolution Slider para superposición */
-    .layer-1 { z-index: 5; }
-    .layer-2 { z-index: 6; }
-    .layer-3 { z-index: 7; }
-    .layer-4 { z-index: 8; }
-    .layer-5 { z-index: 9; }
-    .layer-6 { z-index: 10; }
-
+    .layer-1 {
+        z-index: 5;
+    }
+    .layer-2 {
+        z-index: 6;
+    }
+    .layer-3 {
+        z-index: 7;
+    }
+    .layer-4 {
+        z-index: 8;
+    }
+    .layer-5 {
+        z-index: 9;
+    }
+    .layer-6 {
+        z-index: 10;
+    }
 </style>
 
 <script>
-    import { gsap } from 'gsap';
+    import { gsap } from "gsap";
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const sliderContainer = document.querySelector('.revolution-slider-container');
+    document.addEventListener("DOMContentLoaded", () => {
+        const sliderContainer = document.querySelector(
+            ".revolution-slider-container",
+        );
         if (!sliderContainer) return;
 
         // Se obtienen las variables CSS para el tamaño base del diseño
-        const baseWidth = parseFloat(getComputedStyle(sliderContainer).getPropertyValue('--base-width'));
-        const baseHeight = parseFloat(getComputedStyle(sliderContainer).getPropertyValue('--base-height'));
+        const baseWidth = parseFloat(
+            getComputedStyle(sliderContainer).getPropertyValue("--base-width"),
+        );
+        const baseHeight = parseFloat(
+            getComputedStyle(sliderContainer).getPropertyValue("--base-height"),
+        );
 
         // Función para calcular la posición y tamaño responsivos
         const getResponsiveValue = (value, isWidth) => {
@@ -165,11 +199,12 @@ import { Image } from 'astro:assets';
 
             // --- ANIMACIONES DE CAPAS SUPERIORES (corporate-02.png y corporate-03.png) ---
 
-            const layer2Overlap = layer2OriginalWidth * 0.90;
+            const layer2Overlap = layer2OriginalWidth * 0.9;
             const layer2FinalX = -layer2OriginalWidth + layer2Overlap;
             const layer2FinalY = 0;
 
-            tl.fromTo(".layer-2",
+            tl.fromTo(
+                ".layer-2",
                 {
                     x: getResponsiveValue(-layer2OriginalWidth, true),
                     y: getResponsiveValue(layer2FinalY, false),
@@ -180,15 +215,17 @@ import { Image } from 'astro:assets';
                 {
                     x: getResponsiveValue(layer2FinalX, true),
                     duration: 1.5,
-                    delay: 0.5
-                }, 0
+                    delay: 0.5,
+                },
+                0,
             );
 
-            const layer1Overlap = layer1OriginalWidth * 0.90;
+            const layer1Overlap = layer1OriginalWidth * 0.9;
             const layer1FinalX = baseWidth - layer1Overlap;
             const layer1FinalY = 0;
 
-            tl.fromTo(".layer-1",
+            tl.fromTo(
+                ".layer-1",
                 {
                     x: getResponsiveValue(baseWidth, true),
                     y: getResponsiveValue(layer1FinalY, false),
@@ -199,22 +236,26 @@ import { Image } from 'astro:assets';
                 {
                     x: getResponsiveValue(layer1FinalX, true),
                     duration: 1.5,
-                    delay: 0.5
-                }, 0
+                    delay: 0.5,
+                },
+                0,
             );
-
 
             // --- ANIMACIONES CENTRALES (arrow-black-01.png, arrow-red-01.png, logo-rows-05.png) ---
 
             const getCenteredXPos = (layerWidth) => {
                 const currentContainerWidth = sliderContainer.offsetWidth;
-                return (currentContainerWidth / 2) - (getResponsiveValue(layerWidth, true) / 2);
+                return (
+                    currentContainerWidth / 2 -
+                    getResponsiveValue(layerWidth, true) / 2
+                );
             };
 
             const layer3CenteredX = getCenteredXPos(layer3OriginalWidth);
-            const layer3FinalY = (baseHeight / 1.15) - layer3OriginalHeight;
+            const layer3FinalY = baseHeight / 1.15 - layer3OriginalHeight;
 
-            tl.fromTo(".layer-3",
+            tl.fromTo(
+                ".layer-3",
                 {
                     y: getResponsiveValue(baseHeight, false),
                     x: layer3CenteredX,
@@ -226,26 +267,33 @@ import { Image } from 'astro:assets';
                     y: getResponsiveValue(layer3FinalY, false),
                     opacity: 1,
                     duration: 1.5,
-                    delay: 2.0
-                }
-            )
-            .to(".layer-3", {
+                    delay: 2.0,
+                },
+            ).to(".layer-3", {
                 opacity: 0,
                 duration: 0.5,
-                delay: 0.5
+                delay: 0.5,
             });
 
             const getCenteredPos = (layerWidth, layerHeight) => {
                 const currentContainerWidth = sliderContainer.offsetWidth;
                 const currentContainerHeight = sliderContainer.offsetHeight;
-                const finalX = (currentContainerWidth / 2) - (getResponsiveValue(layerWidth, true) / 2);
-                const finalY = (currentContainerHeight / 2) - (getResponsiveValue(layerHeight, false) / 2);
+                const finalX =
+                    currentContainerWidth / 2 -
+                    getResponsiveValue(layerWidth, true) / 2;
+                const finalY =
+                    currentContainerHeight / 2 -
+                    getResponsiveValue(layerHeight, false) / 2;
                 return { x: finalX, y: finalY };
             };
 
-            const layer4CenteredPos = getCenteredPos(layer4OriginalWidth, layer4OriginalHeight);
+            const layer4CenteredPos = getCenteredPos(
+                layer4OriginalWidth,
+                layer4OriginalHeight,
+            );
 
-            tl.fromTo(".layer-4",
+            tl.fromTo(
+                ".layer-4",
                 {
                     y: layer4CenteredPos.y,
                     x: layer4CenteredPos.x,
@@ -256,13 +304,17 @@ import { Image } from 'astro:assets';
                 {
                     opacity: 1,
                     duration: 0.88,
-                    delay: "<"
-                }
+                    delay: "<",
+                },
             );
 
-            const layer5CenteredPos = getCenteredPos(layer5OriginalWidth, layer5OriginalHeight);
+            const layer5CenteredPos = getCenteredPos(
+                layer5OriginalWidth,
+                layer5OriginalHeight,
+            );
 
-            tl.fromTo(".layer-5",
+            tl.fromTo(
+                ".layer-5",
                 {
                     y: layer5CenteredPos.y,
                     x: layer5CenteredPos.x,
@@ -273,16 +325,17 @@ import { Image } from 'astro:assets';
                 {
                     opacity: 1,
                     duration: 0.92,
-                    delay: "<0.5"
-                }
+                    delay: "<0.5",
+                },
             );
 
             // --- ANIMACIÓN DEL TEXTO (consultoratexto-06.png) ---
 
-            const layer6FinalY = baseHeight - (layer6OriginalHeight * 1.5);
+            const layer6FinalY = baseHeight - layer6OriginalHeight * 1.5;
             const layer6CenteredX = getCenteredXPos(layer6OriginalWidth);
 
-            tl.fromTo(".layer-6",
+            tl.fromTo(
+                ".layer-6",
                 {
                     y: getResponsiveValue(layer6FinalY, false),
                     x: layer6CenteredX,
@@ -293,14 +346,14 @@ import { Image } from 'astro:assets';
                 {
                     opacity: 1,
                     duration: 1,
-                    delay: "<0.5"
-                }
+                    delay: "<0.5",
+                },
             );
         };
 
         // Recalcular posiciones en resize
         let resizeTimer;
-        window.addEventListener('resize', () => {
+        window.addEventListener("resize", () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
                 animateSlider();
