@@ -306,7 +306,11 @@ import { Image } from "astro:assets";
                     duration: 0.88,
                     delay: "<",
                 },
-            );
+            ).to(".layer-4", {
+                opacity: 0,
+                duration: 0.5,
+                delay: 1.4, // Espera a que layer-5 aparezca (0.92s) + 0.5s extra
+            });
 
             const layer5CenteredPos = getCenteredPos(
                 layer5OriginalWidth,
