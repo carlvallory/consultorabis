@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import NavMenu from '../components/NavMenu.astro';
 import RevolutionSliderAstro from '../components/RevolutionSliderAstro.astro';
+import FormularioContacto from '../components/FormularioContacto.astro';
 ---
 
 <Layout title="Consultora Bis - Business Intelligence Services" description="Consultora Bis, tu socio estratégico en Paraguay para el desarrollo y consolidación empresarial. Servicios de asesoramiento financiero, estrategia, investigación y más.">
@@ -114,19 +115,26 @@ import RevolutionSliderAstro from '../components/RevolutionSliderAstro.astro';
                     <img src="icons8-mail-50-white.png" alt="mail" class="w-8 h-8 mr-2" />
 					info@consultorabis.com
                 </a>
-                <a href="tel:+595XXXXXXXXX" class="bg-gradient-to-r from-logo-principal to-logo-secundario hover:bg-logo-acento-darker text-white px-8 py-3 rounded-full text-lg font-semibold transition duration-300 flex items-center">
+                <a href="tel:+595992097568" class="bg-gradient-to-r from-logo-principal to-logo-secundario hover:bg-logo-acento-darker text-white px-8 py-3 rounded-full text-lg font-semibold transition duration-300 flex items-center">
                     <img src="icons8-phone-50-white.png" alt="phone" class="w-8 h-8 mr-2" />
-                    +595 XXXXXXXXX
+                    +595 992 097 568
                 </a>
-                </div>
+            </div>
+			
         </section>
+
+		<section id="contacto" class="py-16 px-4 bg-gradient-to-r from-logo-principal to-logo-secundario text-white w-full border-b border-gray-100">
+			<FormularioContacto />	
+		</section>
+
+		<section id="end" class="py-3 px-4 bg-white mx-auto max-w-4xl mt-10 mb-10 text-center"></section>
     </main>
 
     <footer class="bg-logo-secundario text-white py-8 px-4 mt-auto">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <p class="mb-4 md:mb-0">&copy; {new Date().getFullYear()} Consultora Bis. Todos los derechos reservados.</p>
             <div class="flex space-x-6">
-                <a href="https://wa.me/595XXXXXXXXX" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-400 transition-colors duration-300 flex items-center">
+                <a href="https://wa.me/595992097568" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-400 transition-colors duration-300 flex items-center">
                     <img src="/icons8-whatsapp.svg" alt="WhatsApp" class="w-8 h-8 mr-2 icon" /> WhatsApp
                 </a>
                 <a href="https://www.linkedin.com/company/tu-empresa/" target="_blank" rel="noopener noreferrer" class="text-white hover:text-blue-300 transition-colors duration-300 flex items-center">
