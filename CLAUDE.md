@@ -33,11 +33,16 @@ src/
 ├── layouts/
 │   └── Layout.astro          # <html>, <head>, fuentes, ViewTransitions, slot
 ├── pages/
-│   └── index.astro           # ÚNICA página. Contiene todas las secciones + JS inline de los sliders
+│   └── index.astro           # ÚNICA página. Compone header + secciones vía componentes
 ├── components/
 │   ├── NavMenu.astro         # nav desktop + menú hamburguesa mobile (JS inline)
 │   ├── RevolutionSliderAstro.astro  # hero animado con GSAP (6 capas/layers)
-│   └── FormularioContacto.astro     # datos de contacto + formulario
+│   ├── QuienesSomos.astro    # sección Quiénes Somos (grilla 3 col, versión actual)
+│   ├── Servicios.astro       # sección Servicios (grilla 2×2, versión actual)
+│   ├── FormularioContacto.astro     # datos de contacto + formulario
+│   └── legacy/               # versiones anteriores en carrusel (respaldo, ver docs/alternar-sliders.md)
+│       ├── QuienesSomosSlider.astro
+│       └── ServiciosSlider.astro
 ├── styles/
 │   └── global.css            # estilos base, tipografías, overrides de Tailwind
 └── utils/
@@ -53,8 +58,8 @@ public/
 1. **Header** — logo + `NavMenu`, sticky.
 2. **`RevolutionSliderAstro`** — hero animado con GSAP (splash screen).
 3. **Banner hero** — frase de valor sobre gradiente de marca.
-4. **`#quienes-somos`** — grilla de 3 columnas (Empresa / Misión / Visión) con filete de acento superior. Contenido estático, sin JS.
-5. **`#servicios`** — grilla 2×2 de 4 servicios en tarjetas (Asesoramiento Financiero, Estudios de Mercado, Elaboración y Evaluación de Proyectos, Capacitación). Contenido estático, sin JS.
+4. **`#quienes-somos`** — `<QuienesSomos />`: grilla de 3 columnas (Empresa / Misión / Visión) con filete de acento superior. Contenido estático, sin JS. Tiene versión alterna en carrusel (`legacy/`, ver `docs/alternar-sliders.md`).
+5. **`#servicios`** — `<Servicios />`: grilla 2×2 de 4 servicios en tarjetas (Asesoramiento Financiero, Estudios de Mercado, Elaboración y Evaluación de Proyectos, Capacitación). Contenido estático, sin JS. Tiene versión alterna en carrusel (`legacy/`).
 6. **`#contactanos`** — sección blanca con CTA + botones a Instagram y Facebook. Destino del enlace "Contáctanos" del menú.
 7. **`#contacto`** — `FormularioContacto` (datos de contacto + formulario Web3Forms).
 8. **`#ubicacion`** — bloque de texto con dirección y teléfono (antes era un iframe de Google Maps, retirado a pedido del cliente).

@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import NavMenu from "../components/NavMenu.astro";
 import RevolutionSliderAstro from "../components/RevolutionSliderAstro.astro";
 import FormularioContacto from "../components/FormularioContacto.astro";
+import QuienesSomos from "../components/QuienesSomos.astro";
+import Servicios from "../components/Servicios.astro";
 ---
 
 <Layout
@@ -50,139 +52,9 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 			</div>
 		</section>
 
-		<section
-			id="quienes-somos"
-			class="py-16 px-4 bg-white w-full border-b border-gray-100"
-		>
-			<div class="container mx-auto max-w-6xl">
-				<h2 class="text-logo-secundario text-3xl font-bold text-center mb-12">
-					Quiénes Somos
-				</h2>
+		<QuienesSomos />
 
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
-					<!-- Consultora Bis -->
-					<div class="border-t-2 border-logo-acento pt-6 text-center md:text-left">
-						<h3 class="text-2xl font-semibold text-logo-secundario mb-3">
-							Consultora Bis
-						</h3>
-						<p class="text-gray-700">
-							Somos un <strong class="text-logo-secundario"
-								>equipo multidisciplinario</strong
-							>, con sólida experiencia en temas de carácter
-							<strong class="text-logo-secundario"
-								>económico y financiero</strong
-							>. Ayudamos a empresas y particulares a enfrentar
-							los desafíos de invertir en proyectos complejos,
-							mediante análisis rigurosos, estructuración
-							financiera sólida y acompañamiento estratégico en
-							la toma de decisiones.
-						</p>
-					</div>
-					<!-- Misión -->
-					<div class="border-t-2 border-logo-acento pt-6 text-center md:text-left">
-						<h3 class="text-2xl font-semibold text-logo-secundario mb-3">
-							Misión
-						</h3>
-						<p class="text-gray-700">
-							Acompañar a empresas y particulares en la
-							<strong class="text-logo-secundario"
-								>evaluación, estructuración y gestión de
-								proyectos de inversión</strong
-							>, aportando rigor técnico, análisis financiero
-							sólido y soluciones a medida que faciliten
-							<strong class="text-logo-secundario"
-								>decisiones bien fundamentadas y sostenibles en
-								el tiempo</strong
-							>.
-						</p>
-					</div>
-					<!-- Visión -->
-					<div class="border-t-2 border-logo-acento pt-6 text-center md:text-left">
-						<h3 class="text-2xl font-semibold text-logo-secundario mb-3">
-							Visión
-						</h3>
-						<p class="text-gray-700">
-							Consolidarnos como una <strong
-								class="text-logo-secundario"
-								>firma de referencia</strong
-							> en asesoramiento económico y financiero,
-							destacada por su rigor analítico, independencia de
-							criterio y compromiso con la <strong
-								class="text-logo-secundario"
-								>generación de valor sostenible</strong
-							> para nuestros clientes.
-						</p>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section
-			id="servicios"
-			class="py-16 px-4 bg-gradient-to-r from-logo-principal to-logo-secundario text-white w-full border-b border-gray-100"
-		>
-			<div class="container mx-auto max-w-6xl">
-				<h2 class="text-logo-acento text-3xl font-bold text-center mb-10">
-					Nuestros Servicios
-				</h2>
-
-				<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-					<!-- Servicio 1 -->
-					<div class="bg-white p-6 rounded-lg h-full">
-						<h3 class="text-xl font-semibold text-logo-secundario mb-2">
-							ASESORAMIENTO FINANCIERO
-						</h3>
-						<p class="text-gray-700">
-							Brindamos servicios especializados en gestión de
-							inversiones, wealth management, modelación
-							financiera y valoración de empresas. Elaboramos
-							planes de negocios y realizamos procesos de due
-							diligence para apoyar decisiones estratégicas de
-							negocios.
-						</p>
-					</div>
-					<!-- Servicio 2 -->
-					<div class="bg-white p-6 rounded-lg h-full">
-						<h3 class="text-xl font-semibold text-logo-secundario mb-2">
-							ESTUDIOS DE MERCADO
-						</h3>
-						<p class="text-gray-700">
-							Realizamos estudios de mercado que permiten
-							comprender la dinámica del sector, el
-							comportamiento del consumidor, las tendencias de
-							demanda y la competencia, que sirven como base para
-							validar desarrollar productos, servicios o definir
-							estrategias comerciales.
-						</p>
-					</div>
-					<!-- Servicio 3 -->
-					<div class="bg-white p-6 rounded-lg h-full">
-						<h3 class="text-xl font-semibold text-logo-secundario mb-2">
-							ELABORACIÓN Y EVALUACIÓN DE PROYECTOS
-						</h3>
-						<p class="text-gray-700">
-							Brindamos acompañamiento en el diseño, análisis y
-							seguimiento de proyectos de inversión, incorporando
-							herramientas de evaluación financiera, análisis de
-							riesgos y planificación operativa.
-						</p>
-					</div>
-					<!-- Servicio 4 -->
-					<div class="bg-white p-6 rounded-lg h-full">
-						<h3 class="text-xl font-semibold text-logo-secundario mb-2">
-							CAPACITACIÓN
-						</h3>
-						<p class="text-gray-700">
-							Diseñamos e impartimos programas de capacitación
-							orientados al desarrollo de competencias en el uso
-							del software de TICs aplicados a las finanzas, la
-							gestión del proyecto y la toma de decisiones
-							empresariales.
-						</p>
-					</div>
-				</div>
-			</div>
-		</section>
+		<Servicios />
 
 		<section
 			id="contactanos"

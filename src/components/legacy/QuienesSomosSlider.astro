@@ -1,0 +1,266 @@
+---
+// QuienesSomosSlider.astro  (RESPALDO / versión anterior)
+// Versión previa de la sección "Quiénes Somos" como carrusel (Empresa / Misión / Visión)
+// con autoplay, flechas y dots. Se conserva por si el cliente quiere volver al modo slider.
+// Cómo usar: ver docs/alternar-sliders.md
+---
+
+<section
+	id="quienes-somos"
+	class="py-16 px-4 bg-white w-full border-b border-gray-100"
+>
+	<div class="container mx-auto max-w-6xl">
+		<h2
+			class="text-logo-secundario text-3xl font-bold text-center text-blue-800 mb-8"
+		>
+			Quiénes Somos
+		</h2>
+
+		<!-- Slider Container -->
+		<div class="relative">
+			<!-- Slides -->
+			<div class="slider-container overflow-hidden">
+				<div
+					id="quienes-somos-slider"
+					class="slider-wrapper flex transition-transform duration-500 ease-in-out"
+				>
+					<!-- Slide 1: Consultora Bis -->
+					<div
+						class="slide w-full flex-shrink-0 px-6 md:px-16 py-6 text-center"
+					>
+						<h3
+							class="text-2xl font-semibold text-logo-secundario mb-3"
+						>
+							Consultora Bis
+						</h3>
+						<p class="text-gray-700">
+							Somos un <strong class="text-logo-secundario"
+								>equipo multidisciplinario</strong
+							>, con sólida experiencia en temas de carácter
+							<strong class="text-logo-secundario"
+								>económico y financiero</strong
+							>. Ayudamos a empresas y particulares a
+							enfrentar los desafíos de invertir en proyectos
+							complejos, mediante análisis rigurosos,
+							estructuración financiera sólida y
+							acompañamiento estratégico en la toma de
+							decisiones.
+						</p>
+					</div>
+
+					<!-- Slide 2: Nuestra Misión -->
+					<div
+						class="slide w-full flex-shrink-0 px-6 md:px-16 py-6 text-center"
+					>
+						<h3
+							class="text-2xl font-semibold text-logo-secundario mb-3"
+						>
+							Misión
+						</h3>
+						<p class="text-gray-700">
+							Acompañar a empresas y particulares en la
+							<strong class="text-logo-secundario"
+								>evaluación, estructuración y gestión de
+								proyectos de inversión</strong
+							>, aportando rigor técnico, análisis
+							financiero sólido y soluciones a medida que
+							faciliten <strong class="text-logo-secundario"
+								>decisiones bien fundamentadas y
+								sostenibles en el tiempo</strong
+							>.
+						</p>
+					</div>
+
+					<!-- Slide 3: Nuestra Visión -->
+					<div
+						class="slide w-full flex-shrink-0 px-6 md:px-16 py-6 text-center"
+					>
+						<h3
+							class="text-2xl font-semibold text-logo-secundario mb-3"
+						>
+							Visión
+						</h3>
+						<p class="text-gray-700">
+							Consolidarnos como una <strong
+								class="text-logo-secundario"
+								>firma de referencia</strong
+							> en asesoramiento económico y financiero,
+							destacada por su rigor analítico, independencia
+							de criterio y compromiso con la <strong
+								class="text-logo-secundario"
+								>generación de valor sostenible</strong
+							> para nuestros clientes.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Navigation Arrows -->
+			<button
+				class="slider-prev hidden md:block absolute left-0 top-1/2 -translate-y-1/2 bg-logo-principal hover:bg-logo-secundario text-white p-3 rounded-full transition-colors duration-300 z-10"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M15 19l-7-7 7-7"></path>
+				</svg>
+			</button>
+			<button
+				class="slider-next hidden md:block absolute right-0 top-1/2 -translate-y-1/2 bg-logo-principal hover:bg-logo-secundario text-white p-3 rounded-full transition-colors duration-300 z-10"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M9 5l7 7-7 7"></path>
+				</svg>
+			</button>
+
+			<!-- Navigation Dots -->
+			<div class="flex justify-center mt-8 gap-3">
+				<button
+					class="slider-dot w-3 h-3 rounded-full bg-logo-principal transition-all duration-300"
+					data-slide="0"></button>
+				<button
+					class="slider-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-logo-acento transition-all duration-300"
+					data-slide="1"></button>
+				<button
+					class="slider-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-logo-acento transition-all duration-300"
+					data-slide="2"></button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Slider JavaScript -->
+	<script is:inline>
+		document.addEventListener("DOMContentLoaded", function () {
+			console.log("Quienes Somos slider script loaded");
+			const section = document.getElementById("quienes-somos");
+			const sliderWrapper = section.querySelector(
+				"#quienes-somos-slider",
+			);
+			const slides = section.querySelectorAll(".slide");
+			const prevButton = section.querySelector(".slider-prev");
+			const nextButton = section.querySelector(".slider-next");
+			const dots = section.querySelectorAll(".slider-dot");
+
+			let autoPlayInterval = null;
+			const isMobile = window.innerWidth < 768; // md breakpoint
+
+			console.log("Slider elements:", {
+				sliderWrapper,
+				slides: slides.length,
+				prevButton,
+				nextButton,
+				dots: dots.length,
+			});
+
+			let currentSlide = 0;
+			const totalSlides = slides.length;
+
+			function updateSlider() {
+				console.log("Updating slider to slide:", currentSlide);
+				const translateValue = -(currentSlide * 100);
+				sliderWrapper.style.transform = `translateX(${translateValue}%)`;
+				console.log(
+					"Applied transform:",
+					sliderWrapper.style.transform,
+				);
+
+				// Update dots
+				dots.forEach((dot, index) => {
+					if (index === currentSlide) {
+						dot.classList.remove("bg-gray-300");
+						dot.classList.add("bg-logo-principal");
+					} else {
+						dot.classList.remove("bg-logo-principal");
+						dot.classList.add("bg-gray-300");
+					}
+				});
+			}
+
+			function nextSlide() {
+				console.log(
+					"Next slide clicked, current:",
+					currentSlide,
+				);
+				currentSlide = (currentSlide + 1) % totalSlides;
+				updateSlider();
+			}
+
+			function startAutoPlay() {
+				if (autoPlayInterval) return; // Ya está corriendo
+				console.log("Starting auto-play");
+				autoPlayInterval = setInterval(nextSlide, 5000);
+			}
+
+			function stopAutoPlay() {
+				if (autoPlayInterval) {
+					console.log("Stopping auto-play");
+					clearInterval(autoPlayInterval);
+					autoPlayInterval = null;
+				}
+			}
+
+			function prevSlide() {
+				console.log(
+					"Prev slide clicked, current:",
+					currentSlide,
+				);
+				currentSlide =
+					(currentSlide - 1 + totalSlides) % totalSlides;
+				updateSlider();
+			}
+
+			function goToSlide(index) {
+				console.log("Go to slide:", index);
+				currentSlide = index;
+				updateSlider();
+			}
+
+			// Event listeners
+			if (prevButton) {
+				prevButton.addEventListener("click", function () {
+					stopAutoPlay(); // Detener auto-play si hace clic en prev
+					prevSlide();
+				});
+				console.log("Prev button listener added");
+			}
+			if (nextButton) {
+				nextButton.addEventListener("click", function () {
+					nextSlide();
+					if (!isMobile && !autoPlayInterval) {
+						startAutoPlay(); // Iniciar auto-play en desktop después del primer clic
+					}
+				});
+				console.log("Next button listener added");
+			}
+
+			dots.forEach((dot, index) => {
+				dot.addEventListener("click", () => goToSlide(index));
+			});
+			console.log("Dot listeners added");
+
+			// Auto-play en mobile siempre
+			if (isMobile) {
+				console.log("Mobile detected - starting auto-play");
+				startAutoPlay();
+			}
+		});
+	</script>
+</section>
