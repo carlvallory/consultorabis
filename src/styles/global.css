@@ -24,15 +24,9 @@ h1, h2, h3, h4, h5, h6 {
     @apply text-logo-principal; 
 }
 
-/* Eliminar sombras y bordes por defecto si no son deseados en elementos comunes */
-/* Esto sobrescribe los estilos por defecto de Tailwind para elementos como botones o inputs si los agregas */
-.shadow-md, .shadow-lg, .shadow-xl {
-    box-shadow: none !important; /* Fuerza la eliminación de sombras */
-}
-
-.rounded-lg {
-    border-radius: 0 !important; /* Elimina bordes redondeados si buscas un look muy rectilíneo */
-}
+/* Sin sombras en el sitio: se busca un look limpio y plano, con esquinas
+   redondeadas coherentes. Las sombras se omiten directamente en el markup
+   (no se usan clases shadow-*), así que no hace falta anularlas aquí. */
 
 /* Ajuste para el scroll en los anclajes del menú, considerando un header fijo */
 section {
