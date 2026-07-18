@@ -55,259 +55,66 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 			class="py-16 px-4 bg-white w-full border-b border-gray-100"
 		>
 			<div class="container mx-auto max-w-6xl">
-				<h2
-					class="text-logo-secundario text-3xl font-bold text-center text-blue-800 mb-8"
-				>
+				<h2 class="text-logo-secundario text-3xl font-bold text-center mb-12">
 					Quiénes Somos
 				</h2>
 
-				<!-- Slider Container -->
-				<div class="relative">
-					<!-- Slides -->
-					<div class="slider-container overflow-hidden">
-						<div
-							id="quienes-somos-slider"
-							class="slider-wrapper flex transition-transform duration-500 ease-in-out"
-						>
-							<!-- Slide 1: Consultora Bis -->
-							<div
-								class="slide w-full flex-shrink-0 px-6 md:px-16 py-6 text-center"
-							>
-								<h3
-									class="text-2xl font-semibold text-logo-secundario mb-3"
-								>
-									Consultora Bis
-								</h3>
-								<p class="text-gray-700">
-									Somos un <strong class="text-logo-secundario"
-										>equipo multidisciplinario</strong
-									>, con sólida experiencia en temas de carácter
-									<strong class="text-logo-secundario"
-										>económico y financiero</strong
-									>. Ayudamos a empresas y particulares a
-									enfrentar los desafíos de invertir en proyectos
-									complejos, mediante análisis rigurosos,
-									estructuración financiera sólida y
-									acompañamiento estratégico en la toma de
-									decisiones.
-								</p>
-							</div>
-
-							<!-- Slide 2: Nuestra Misión -->
-							<div
-								class="slide w-full flex-shrink-0 px-6 md:px-16 py-6 text-center"
-							>
-								<h3
-									class="text-2xl font-semibold text-logo-secundario mb-3"
-								>
-									Misión
-								</h3>
-								<p class="text-gray-700">
-									Acompañar a empresas y particulares en la
-									<strong class="text-logo-secundario"
-										>evaluación, estructuración y gestión de
-										proyectos de inversión</strong
-									>, aportando rigor técnico, análisis
-									financiero sólido y soluciones a medida que
-									faciliten <strong class="text-logo-secundario"
-										>decisiones bien fundamentadas y
-										sostenibles en el tiempo</strong
-									>.
-								</p>
-							</div>
-
-							<!-- Slide 3: Nuestra Visión -->
-							<div
-								class="slide w-full flex-shrink-0 px-6 md:px-16 py-6 text-center"
-							>
-								<h3
-									class="text-2xl font-semibold text-logo-secundario mb-3"
-								>
-									Visión
-								</h3>
-								<p class="text-gray-700">
-									Consolidarnos como una <strong
-										class="text-logo-secundario"
-										>firma de referencia</strong
-									> en asesoramiento económico y financiero,
-									destacada por su rigor analítico, independencia
-									de criterio y compromiso con la <strong
-										class="text-logo-secundario"
-										>generación de valor sostenible</strong
-									> para nuestros clientes.
-								</p>
-							</div>
-						</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+					<!-- Consultora Bis -->
+					<div class="border-t-2 border-logo-acento pt-6 text-center md:text-left">
+						<h3 class="text-2xl font-semibold text-logo-secundario mb-3">
+							Consultora Bis
+						</h3>
+						<p class="text-gray-700">
+							Somos un <strong class="text-logo-secundario"
+								>equipo multidisciplinario</strong
+							>, con sólida experiencia en temas de carácter
+							<strong class="text-logo-secundario"
+								>económico y financiero</strong
+							>. Ayudamos a empresas y particulares a enfrentar
+							los desafíos de invertir en proyectos complejos,
+							mediante análisis rigurosos, estructuración
+							financiera sólida y acompañamiento estratégico en
+							la toma de decisiones.
+						</p>
 					</div>
-
-					<!-- Navigation Arrows -->
-					<button
-						class="slider-prev hidden md:block absolute left-0 top-1/2 -translate-y-1/2 bg-logo-principal hover:bg-logo-secundario text-white p-3 rounded-full transition-colors duration-300 z-10"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M15 19l-7-7 7-7"></path>
-						</svg>
-					</button>
-					<button
-						class="slider-next hidden md:block absolute right-0 top-1/2 -translate-y-1/2 bg-logo-principal hover:bg-logo-secundario text-white p-3 rounded-full transition-colors duration-300 z-10"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 5l7 7-7 7"></path>
-						</svg>
-					</button>
-
-					<!-- Navigation Dots -->
-					<div class="flex justify-center mt-8 gap-3">
-						<button
-							class="slider-dot w-3 h-3 rounded-full bg-logo-principal transition-all duration-300"
-							data-slide="0"></button>
-						<button
-							class="slider-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-logo-acento transition-all duration-300"
-							data-slide="1"></button>
-						<button
-							class="slider-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-logo-acento transition-all duration-300"
-							data-slide="2"></button>
+					<!-- Misión -->
+					<div class="border-t-2 border-logo-acento pt-6 text-center md:text-left">
+						<h3 class="text-2xl font-semibold text-logo-secundario mb-3">
+							Misión
+						</h3>
+						<p class="text-gray-700">
+							Acompañar a empresas y particulares en la
+							<strong class="text-logo-secundario"
+								>evaluación, estructuración y gestión de
+								proyectos de inversión</strong
+							>, aportando rigor técnico, análisis financiero
+							sólido y soluciones a medida que faciliten
+							<strong class="text-logo-secundario"
+								>decisiones bien fundamentadas y sostenibles en
+								el tiempo</strong
+							>.
+						</p>
+					</div>
+					<!-- Visión -->
+					<div class="border-t-2 border-logo-acento pt-6 text-center md:text-left">
+						<h3 class="text-2xl font-semibold text-logo-secundario mb-3">
+							Visión
+						</h3>
+						<p class="text-gray-700">
+							Consolidarnos como una <strong
+								class="text-logo-secundario"
+								>firma de referencia</strong
+							> en asesoramiento económico y financiero,
+							destacada por su rigor analítico, independencia de
+							criterio y compromiso con la <strong
+								class="text-logo-secundario"
+								>generación de valor sostenible</strong
+							> para nuestros clientes.
+						</p>
 					</div>
 				</div>
 			</div>
-
-			<!-- Slider JavaScript -->
-			<script is:inline>
-				document.addEventListener("DOMContentLoaded", function () {
-					console.log("Quienes Somos slider script loaded");
-					const section = document.getElementById("quienes-somos");
-					const sliderWrapper = section.querySelector(
-						"#quienes-somos-slider",
-					);
-					const slides = section.querySelectorAll(".slide");
-					const prevButton = section.querySelector(".slider-prev");
-					const nextButton = section.querySelector(".slider-next");
-					const dots = section.querySelectorAll(".slider-dot");
-
-					let autoPlayInterval = null;
-					const isMobile = window.innerWidth < 768; // md breakpoint
-
-					console.log("Slider elements:", {
-						sliderWrapper,
-						slides: slides.length,
-						prevButton,
-						nextButton,
-						dots: dots.length,
-					});
-
-					let currentSlide = 0;
-					const totalSlides = slides.length;
-
-					function updateSlider() {
-						console.log("Updating slider to slide:", currentSlide);
-						const translateValue = -(currentSlide * 100);
-						sliderWrapper.style.transform = `translateX(${translateValue}%)`;
-						console.log(
-							"Applied transform:",
-							sliderWrapper.style.transform,
-						);
-
-						// Update dots
-						dots.forEach((dot, index) => {
-							if (index === currentSlide) {
-								dot.classList.remove("bg-gray-300");
-								dot.classList.add("bg-logo-principal");
-							} else {
-								dot.classList.remove("bg-logo-principal");
-								dot.classList.add("bg-gray-300");
-							}
-						});
-					}
-
-					function nextSlide() {
-						console.log(
-							"Next slide clicked, current:",
-							currentSlide,
-						);
-						currentSlide = (currentSlide + 1) % totalSlides;
-						updateSlider();
-					}
-
-					function startAutoPlay() {
-						if (autoPlayInterval) return; // Ya está corriendo
-						console.log("Starting auto-play");
-						autoPlayInterval = setInterval(nextSlide, 5000);
-					}
-
-					function stopAutoPlay() {
-						if (autoPlayInterval) {
-							console.log("Stopping auto-play");
-							clearInterval(autoPlayInterval);
-							autoPlayInterval = null;
-						}
-					}
-
-					function prevSlide() {
-						console.log(
-							"Prev slide clicked, current:",
-							currentSlide,
-						);
-						currentSlide =
-							(currentSlide - 1 + totalSlides) % totalSlides;
-						updateSlider();
-					}
-
-					function goToSlide(index) {
-						console.log("Go to slide:", index);
-						currentSlide = index;
-						updateSlider();
-					}
-
-					// Event listeners
-					if (prevButton) {
-						prevButton.addEventListener("click", function () {
-							stopAutoPlay(); // Detener auto-play si hace clic en prev
-							prevSlide();
-						});
-						console.log("Prev button listener added");
-					}
-					if (nextButton) {
-						nextButton.addEventListener("click", function () {
-							nextSlide();
-							if (!isMobile && !autoPlayInterval) {
-								startAutoPlay(); // Iniciar auto-play en desktop después del primer clic
-							}
-						});
-						console.log("Next button listener added");
-					}
-
-					dots.forEach((dot, index) => {
-						dot.addEventListener("click", () => goToSlide(index));
-					});
-					console.log("Dot listeners added");
-
-					// Auto-play en mobile siempre
-					if (isMobile) {
-						console.log("Mobile detected - starting auto-play");
-						startAutoPlay();
-					}
-				});
-			</script>
 		</section>
 
 		<section
@@ -315,333 +122,70 @@ import FormularioContacto from "../components/FormularioContacto.astro";
 			class="py-16 px-4 bg-gradient-to-r from-logo-principal to-logo-secundario text-white w-full border-b border-gray-100"
 		>
 			<div class="container mx-auto max-w-6xl">
-				<h2
-					class="text-logo-acento text-3xl font-bold text-center mb-10"
-				>
+				<h2 class="text-logo-acento text-3xl font-bold text-center mb-10">
 					Nuestros Servicios
 				</h2>
 
-				<!-- Slider Container -->
-				<div class="relative">
-					<!-- Slides Wrapper -->
-					<div class="overflow-hidden">
-						<div
-							id="servicios-slider"
-							class="flex transition-transform duration-500 ease-in-out md:gap-8"
-						>
-							<!-- Servicio 1 -->
-							<div
-								class="service-slide flex-shrink-0 w-full md:w-[calc(33.333%-1.333rem)]"
-							>
-								<div
-									class="bg-white p-6 rounded-lg h-full"
-								>
-									<h3
-										class="text-xl font-semibold text-logo-secundario mb-2"
-									>
-										ASESORAMIENTO FINANCIERO
-									</h3>
-									<p class="text-gray-700">
-										Brindamos servicios especializados en
-										gestión de inversiones, wealth
-										management, modelación financiera y
-										valoración de empresas. Elaboramos
-										planes de negocios y realizamos procesos
-										de due diligence para apoyar decisiones
-										estratégicas de negocios.
-									</p>
-								</div>
-							</div>
-
-							<!-- Servicio 2 -->
-							<div
-								class="service-slide flex-shrink-0 w-full md:w-[calc(33.333%-1.333rem)]"
-							>
-								<div
-									class="bg-white p-6 rounded-lg h-full"
-								>
-									<h3
-										class="text-xl font-semibold text-logo-secundario mb-2"
-									>
-										ESTUDIOS DE MERCADO
-									</h3>
-									<p class="text-gray-700">
-										Realizamos estudios de mercado que
-										permiten comprender la dinámica del
-										sector, el comportamiento del
-										consumidor, las tendencias de demanda y
-										la competencia, que sirven como base
-										para validar desarrollar productos,
-										servicios o definir estrategias
-										comerciales.
-									</p>
-								</div>
-							</div>
-
-							<!-- Servicio 3 -->
-							<div
-								class="service-slide flex-shrink-0 w-full md:w-[calc(33.333%-1.333rem)]"
-							>
-								<div
-									class="bg-white p-6 rounded-lg h-full"
-								>
-									<h3
-										class="text-xl font-semibold text-logo-secundario mb-2"
-									>
-										ELABORACIÓN Y EVALUACIÓN DE PROYECTOS
-									</h3>
-									<p class="text-gray-700">
-										Brindamos acompañamiento en el diseño,
-										análisis y seguimiento de proyectos de
-										inversión, incorporando herramientas de
-										evaluación financiera, análisis de
-										riesgos y planificación operativa.
-									</p>
-								</div>
-							</div>
-
-							<!-- Servicio 4 -->
-							<div
-								class="service-slide flex-shrink-0 w-full md:w-[calc(33.333%-1.333rem)]"
-							>
-								<div
-									class="bg-white p-6 rounded-lg h-full"
-								>
-									<h3
-										class="text-xl font-semibold text-logo-secundario mb-2"
-									>
-										CAPACITACIÓN
-									</h3>
-									<p class="text-gray-700">
-										Diseñamos e impartimos programas de
-										capacitación orientados al desarrollo de
-										competencias en el uso del software de
-										TICs aplicados a las finanzas, la
-										gestión del proyecto y la toma de
-										decisiones empresariales.
-									</p>
-								</div>
-							</div>
-						</div>
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+					<!-- Servicio 1 -->
+					<div class="bg-white p-6 rounded-lg h-full">
+						<h3 class="text-xl font-semibold text-logo-secundario mb-2">
+							ASESORAMIENTO FINANCIERO
+						</h3>
+						<p class="text-gray-700">
+							Brindamos servicios especializados en gestión de
+							inversiones, wealth management, modelación
+							financiera y valoración de empresas. Elaboramos
+							planes de negocios y realizamos procesos de due
+							diligence para apoyar decisiones estratégicas de
+							negocios.
+						</p>
 					</div>
-
-					<!-- Navigation Arrows -->
-					<button
-						class="servicios-prev hidden md:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white hover:bg-logo-acento text-logo-principal p-3 rounded-full transition-colors duration-300 z-10"
-						style="left: -3rem"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M15 19l-7-7 7-7"></path>
-						</svg>
-					</button>
-					<button
-						class="servicios-next hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white hover:bg-logo-acento text-logo-principal p-3 rounded-full transition-colors duration-300 z-10"
-						style="right: -3rem"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 5l7 7-7 7"></path>
-						</svg>
-					</button>
-
-					<!-- Navigation Dots -->
-					<div class="flex justify-center mt-8 gap-3">
-						<button
-							class="servicios-dot w-3 h-3 rounded-full bg-white transition-all duration-300"
-							data-slide="0"></button>
-						<button
-							class="servicios-dot w-3 h-3 rounded-full bg-logo-acento hover:bg-white transition-all duration-300"
-							data-slide="1"></button>
+					<!-- Servicio 2 -->
+					<div class="bg-white p-6 rounded-lg h-full">
+						<h3 class="text-xl font-semibold text-logo-secundario mb-2">
+							ESTUDIOS DE MERCADO
+						</h3>
+						<p class="text-gray-700">
+							Realizamos estudios de mercado que permiten
+							comprender la dinámica del sector, el
+							comportamiento del consumidor, las tendencias de
+							demanda y la competencia, que sirven como base para
+							validar desarrollar productos, servicios o definir
+							estrategias comerciales.
+						</p>
+					</div>
+					<!-- Servicio 3 -->
+					<div class="bg-white p-6 rounded-lg h-full">
+						<h3 class="text-xl font-semibold text-logo-secundario mb-2">
+							ELABORACIÓN Y EVALUACIÓN DE PROYECTOS
+						</h3>
+						<p class="text-gray-700">
+							Brindamos acompañamiento en el diseño, análisis y
+							seguimiento de proyectos de inversión, incorporando
+							herramientas de evaluación financiera, análisis de
+							riesgos y planificación operativa.
+						</p>
+					</div>
+					<!-- Servicio 4 -->
+					<div class="bg-white p-6 rounded-lg h-full">
+						<h3 class="text-xl font-semibold text-logo-secundario mb-2">
+							CAPACITACIÓN
+						</h3>
+						<p class="text-gray-700">
+							Diseñamos e impartimos programas de capacitación
+							orientados al desarrollo de competencias en el uso
+							del software de TICs aplicados a las finanzas, la
+							gestión del proyecto y la toma de decisiones
+							empresariales.
+						</p>
 					</div>
 				</div>
 			</div>
-
-			<!-- Slider JavaScript -->
-			<script is:inline>
-				document.addEventListener("DOMContentLoaded", function () {
-					const section = document.getElementById("servicios");
-					const sliderWrapper =
-						section.querySelector("#servicios-slider");
-					const slides = section.querySelectorAll(".service-slide");
-					const prevButton = section.querySelector(".servicios-prev");
-					const nextButton = section.querySelector(".servicios-next");
-					const dots = section.querySelectorAll(".servicios-dot");
-
-					let currentSlide = 0;
-					let autoPlayInterval = null;
-					const isMobile = window.innerWidth < 768;
-					const totalSlides = slides.length;
-					const slidesPerView = isMobile ? 1 : 3;
-					const maxSlide = isMobile ? totalSlides - 1 : 1; // En desktop solo 2 posiciones (0 y 1)
-
-					function updateSlider() {
-						const isMobileNow = window.innerWidth < 768;
-						let translateValue;
-
-						if (isMobileNow) {
-							// En mobile: usar el ancho completo del contenedor
-							const containerWidth =
-								sliderWrapper.parentElement.offsetWidth;
-							translateValue = -(currentSlide * containerWidth);
-						} else {
-							// En desktop: mover de 3 en 3 slides
-							const slideWidth = slides[0].offsetWidth;
-							const gap = 32; // 2rem = 32px gap
-							// Multiplicar por 3 para saltar 3 slides completos
-							translateValue = -(
-								currentSlide *
-								3 *
-								(slideWidth + gap)
-							);
-						}
-
-						sliderWrapper.style.transform = `translateX(${translateValue}px)`;
-
-						// Update dots
-						dots.forEach((dot, index) => {
-							if (index === currentSlide) {
-								dot.classList.remove("bg-logo-acento");
-								dot.classList.add("bg-white");
-							} else {
-								dot.classList.remove("bg-white");
-								dot.classList.add("bg-logo-acento");
-							}
-						});
-					}
-
-					function nextSlide() {
-						currentSlide =
-							currentSlide >= maxSlide ? 0 : currentSlide + 1;
-						updateSlider();
-					}
-
-					function prevSlide() {
-						currentSlide =
-							currentSlide <= 0 ? maxSlide : currentSlide - 1;
-						updateSlider();
-					}
-
-					function goToSlide(index) {
-						currentSlide = index;
-						updateSlider();
-					}
-
-					function startAutoPlay() {
-						if (autoPlayInterval) return;
-						autoPlayInterval = setInterval(nextSlide, 5000);
-					}
-
-					function stopAutoPlay() {
-						if (autoPlayInterval) {
-							clearInterval(autoPlayInterval);
-							autoPlayInterval = null;
-						}
-					}
-
-					// Event listeners
-					if (prevButton) {
-						prevButton.addEventListener("click", function () {
-							stopAutoPlay();
-							prevSlide();
-						});
-					}
-					if (nextButton) {
-						nextButton.addEventListener("click", function () {
-							nextSlide();
-							if (!isMobile && !autoPlayInterval) {
-								startAutoPlay();
-							}
-						});
-					}
-
-					dots.forEach((dot, index) => {
-						dot.addEventListener("click", () => {
-							stopAutoPlay();
-							goToSlide(index);
-						});
-					});
-
-					// Auto-play en mobile
-					if (isMobile) {
-						startAutoPlay();
-					}
-
-					// Update on window resize
-					let resizeTimer;
-					window.addEventListener("resize", function () {
-						clearTimeout(resizeTimer);
-						resizeTimer = setTimeout(function () {
-							updateSlider();
-						}, 250);
-					});
-				});
-			</script>
 		</section>
 
 		<section
 			id="contactanos"
-			class="py-16 px-4 bg-white mx-auto max-w-4xl mt-10 mb-10 text-center"
-		>
-			<h2
-				class="text-logo-secundario text-3xl font-bold text-logo-secundario mb-6"
-			>
-				Contáctanos
-			</h2>
-			<p class="text-lg text-gray-700 mb-8">
-				¿Listo para llevar tu negocio al siguiente nivel? Contáctanos
-				hoy mismo para una consulta personalizada.
-			</p>
-			<div
-				class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8"
-			>
-				<a
-					href="https://www.instagram.com/consultorabis/"
-					target="_blank"
-					class="bg-gradient-to-r from-logo-principal to-logo-secundario hover:bg-logo-acento-darker text-white px-8 py-3 rounded-full text-lg font-semibold transition duration-300 flex items-center"
-				>
-					<img
-						src="icons8-instagram-50.png"
-						alt="mail"
-						class="w-8 h-8 mr-2"
-					/>
-					Instagram
-				</a>
-				<a
-					href="https://www.facebook.com/consultoraBis/"
-					target="_blank"
-					class="bg-gradient-to-r from-logo-principal to-logo-secundario hover:bg-logo-acento-darker text-white px-8 py-3 rounded-full text-lg font-semibold transition duration-300 flex items-center"
-				>
-					<img
-						src="icons8-facebook-50.png"
-						alt="phone"
-						class="w-8 h-8 mr-2"
-					/>
-					Facebook
-				</a>
-			</div>
-		</section>
-
-		<section
-			id="contacto"
 			class="py-16 px-4 bg-gradient-to-r from-logo-principal to-logo-secundario text-white w-full border-b border-gray-100"
 		>
 			<FormularioContacto />

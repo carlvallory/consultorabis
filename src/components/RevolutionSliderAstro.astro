@@ -353,6 +353,14 @@ import { Image } from "astro:assets";
                     delay: "<0.5",
                 },
             );
+
+            // Respeta la preferencia de movimiento reducido: salta al estado
+            // final (composición completa) sin reproducir la animación.
+            if (
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ) {
+                tl.progress(1);
+            }
         };
 
         // Recalcular posiciones en resize

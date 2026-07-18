@@ -53,20 +53,19 @@ public/
 1. **Header** — logo + `NavMenu`, sticky.
 2. **`RevolutionSliderAstro`** — hero animado con GSAP (splash screen).
 3. **Banner hero** — frase de valor sobre gradiente de marca.
-4. **`#quienes-somos`** — slider de 3 slides (Empresa / Misión / Visión), JS inline con autoplay.
-5. **`#servicios`** — slider de 4 servicios en tarjetas (Asesoramiento Financiero, Estudios de Mercado, Elaboración y Evaluación de Proyectos, Capacitación), JS inline responsive.
-6. **`#contactanos`** — botones a Instagram y Facebook.
-7. **`#contacto`** — `FormularioContacto` (datos + form).
-8. **`#ubicacion`** — bloque de texto con dirección y teléfono (antes era un iframe de Google Maps, retirado a pedido del cliente).
-9. **Footer** — copyright + WhatsApp/LinkedIn.
+4. **`#quienes-somos`** — grilla de 3 columnas (Empresa / Misión / Visión) con filete de acento superior. Contenido estático, sin JS.
+5. **`#servicios`** — grilla 2×2 de 4 servicios en tarjetas (Asesoramiento Financiero, Estudios de Mercado, Elaboración y Evaluación de Proyectos, Capacitación). Contenido estático, sin JS.
+6. **`#contactanos`** — `FormularioContacto` (heading + CTA, datos de contacto, redes "Seguinos" y formulario Web3Forms). Es el destino del enlace "Contáctanos" del menú.
+7. **`#ubicacion`** — bloque de texto con dirección y teléfono (antes era un iframe de Google Maps, retirado a pedido del cliente).
+8. **Footer** — copyright + WhatsApp/LinkedIn.
 
 ## Convenciones de diseño
 
 - **Paleta y tipografías documentadas en `paleta-de-colores.md`.** Colores de marca en `tailwind.config.js`:
   `logo-principal #db4f58`, `logo-secundario #e55e4b`, `logo-acento #fbc8b0`.
 - Gradiente de marca recurrente: `bg-gradient-to-r from-logo-principal to-logo-secundario`.
-- `global.css` fuerza un look rectilíneo: elimina `box-shadow` de `.shadow-*` y `border-radius` de `.rounded-lg` con `!important`. Tenerlo presente al añadir sombras/bordes redondeados: pueden ser anulados globalmente.
-- Los sliders están implementados a mano con **JavaScript `<script is:inline>`** dentro de `index.astro` (no hay librería de carrusel). Cada uno maneja dots, flechas, autoplay y resize.
+- **Sin sombras en todo el sitio** y esquinas redondeadas coherentes (decisión de diseño del cliente). No usar clases `shadow-*`; para separar zonas usar bordes sutiles (`border-b`/`border-t`).
+- **Único JS de UI:** la animación GSAP del hero (`RevolutionSliderAstro`), que respeta `prefers-reduced-motion`. Las secciones Quiénes Somos y Servicios son grillas estáticas (ya no hay carruseles ni JS inline).
 
 ## Trabajo reciente (git)
 
@@ -76,9 +75,6 @@ Commits recientes se han centrado en el **hero / splash screen animado** (`Revol
 
 - **Formulario:** `FormularioContacto.astro` envía vía **Web3Forms** (fetch a `api.web3forms.com/submit`) con estados Enviando/Enviado/Error y honeypot anti-spam. Requiere la env var `PUBLIC_WEB3FORMS_KEY` (ver `.env.example`); configurarla en Vercel y en `.env` local. El access key es público por diseño. Los mensajes llegan al correo con el que se registró el key (previsto: `info@consultorabis.com.py`).
 - **Dependencia Tailwind mixta:** además de `tailwindcss@3` (el que realmente se usa vía PostCSS), está instalado `@tailwindcss/vite@^4` que **no está conectado** en `astro.config.mjs`. Es una dependencia huérfana; no migrar a v4 sin decisión explícita.
-- **Clase inexistente:** en `#contactanos` los botones usan `hover:bg-logo-acento-darker`, color que no existe en `tailwind.config.js` (no hace nada).
-- **Clases de color duplicadas/contradictorias** en algunos títulos de `index.astro` (p. ej. `text-logo-secundario ... text-blue-800`). Gana la última que Tailwind emita; limpiar si se tocan.
-- **`console.log` de depuración** presentes en los scripts de los sliders.
 - **`README.md` es el starter por defecto de Astro** (no describe este proyecto). La documentación real es este `CLAUDE.md`.
 - **`src/utils/helpers.js` está vacío** (reservado para uso futuro; se conserva a propósito).
 
