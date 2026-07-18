@@ -74,7 +74,7 @@ Commits recientes se han centrado en el **hero / splash screen animado** (`Revol
 
 ## Gotchas / deuda técnica (verificar antes de asumir)
 
-- **Formulario sin backend:** `FormularioContacto.astro` no tiene `action`, `method` ni handler JS. No envía nada. Si se pide "que el formulario funcione", hay que implementar el envío desde cero.
+- **Formulario:** `FormularioContacto.astro` envía vía **Web3Forms** (fetch a `api.web3forms.com/submit`) con estados Enviando/Enviado/Error y honeypot anti-spam. Requiere la env var `PUBLIC_WEB3FORMS_KEY` (ver `.env.example`); configurarla en Vercel y en `.env` local. El access key es público por diseño. Los mensajes llegan al correo con el que se registró el key (previsto: `info@consultorabis.com.py`).
 - **Dependencia Tailwind mixta:** además de `tailwindcss@3` (el que realmente se usa vía PostCSS), está instalado `@tailwindcss/vite@^4` que **no está conectado** en `astro.config.mjs`. Es una dependencia huérfana; no migrar a v4 sin decisión explícita.
 - **Clase inexistente:** en `#contactanos` los botones usan `hover:bg-logo-acento-darker`, color que no existe en `tailwind.config.js` (no hace nada).
 - **Clases de color duplicadas/contradictorias** en algunos títulos de `index.astro` (p. ej. `text-logo-secundario ... text-blue-800`). Gana la última que Tailwind emita; limpiar si se tocan.
