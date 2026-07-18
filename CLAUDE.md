@@ -55,9 +55,10 @@ public/
 3. **Banner hero** — frase de valor sobre gradiente de marca.
 4. **`#quienes-somos`** — grilla de 3 columnas (Empresa / Misión / Visión) con filete de acento superior. Contenido estático, sin JS.
 5. **`#servicios`** — grilla 2×2 de 4 servicios en tarjetas (Asesoramiento Financiero, Estudios de Mercado, Elaboración y Evaluación de Proyectos, Capacitación). Contenido estático, sin JS.
-6. **`#contactanos`** — `FormularioContacto` (heading + CTA, datos de contacto, redes "Seguinos" y formulario Web3Forms). Es el destino del enlace "Contáctanos" del menú.
-7. **`#ubicacion`** — bloque de texto con dirección y teléfono (antes era un iframe de Google Maps, retirado a pedido del cliente).
-8. **Footer** — copyright + WhatsApp/LinkedIn.
+6. **`#contactanos`** — sección blanca con CTA + botones a Instagram y Facebook. Destino del enlace "Contáctanos" del menú.
+7. **`#contacto`** — `FormularioContacto` (datos de contacto + formulario Web3Forms).
+8. **`#ubicacion`** — bloque de texto con dirección y teléfono (antes era un iframe de Google Maps, retirado a pedido del cliente).
+9. **Footer** — copyright + WhatsApp/LinkedIn.
 
 ## Convenciones de diseño
 
