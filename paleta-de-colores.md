@@ -42,8 +42,8 @@ Utilidades de Tailwind usadas directamente en las plantillas.
 
 | Rol            | Fuente             | Definición |
 |----------------|--------------------|------------|
-| Encabezados    | **Open Sans**      | `fontFamily.heading` — `h1`–`h6`, enlaces, peso 600 |
-| Cuerpo         | **Source Sans Pro**| `fontFamily.body` — texto general |
+| Encabezados    | **Archivo**        | `fontFamily.heading` — `h1`–`h6`, enlaces (estándar corporativo) |
+| Cuerpo         | **Inter**          | `fontFamily.body` — texto general |
 
 ## Nota
 

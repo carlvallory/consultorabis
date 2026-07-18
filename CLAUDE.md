@@ -15,7 +15,7 @@ Sitio web **one-page** (landing) de **Consultora Bis**, una consultora de servic
 - **Astro `^5.9.2`** — framework, salida estática (SSG). `astro.config.mjs` está vacío (config por defecto, sin integraciones).
 - **Tailwind CSS `3.4.17`** vía **PostCSS** (`postcss.config.js` + `autoprefixer`). El CSS global usa sintaxis v3 (`@tailwind base/components/utilities`, `@apply`, `theme()`).
 - **GSAP `^3.13.0`** — anima el hero (Revolution Slider).
-- **Google Fonts:** Open Sans (títulos) + Source Sans Pro (cuerpo), cargadas en `Layout.astro`.
+- **Google Fonts:** Archivo (títulos, estándar corporativo) + Inter (cuerpo), cargadas en `Layout.astro`.
 
 ## Comandos
 

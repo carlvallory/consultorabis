@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'heading': ['"Open Sans"', 'sans-serif'], // Para encabezados
-        'body': ['"Source Sans Pro"', 'sans-serif'],   // Para el texto del cuerpo
+        'heading': ['"Archivo"', 'sans-serif'], // Para encabezados (estándar corporativo)
+        'body': ['"Inter"', 'sans-serif'],   // Para el texto del cuerpo
       },
       colors: {
         'logo-principal': '#db4f58', // Reemplaza con el color principal de tu logo
