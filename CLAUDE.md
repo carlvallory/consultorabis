@@ -54,10 +54,10 @@ public/
 2. **`RevolutionSliderAstro`** — hero animado con GSAP (splash screen).
 3. **Banner hero** — frase de valor sobre gradiente de marca.
 4. **`#quienes-somos`** — slider de 3 slides (Empresa / Misión / Visión), JS inline con autoplay.
-5. **`#servicios`** — slider de 6 servicios en tarjetas (Asesoramiento Financiero, Legal, Investigación, Estudios de Mercado, Elaboración y Evaluación de Proyectos, Capacitación), JS inline responsive.
+5. **`#servicios`** — slider de 4 servicios en tarjetas (Asesoramiento Financiero, Estudios de Mercado, Elaboración y Evaluación de Proyectos, Capacitación), JS inline responsive.
 6. **`#contactanos`** — botones a Instagram y Facebook.
 7. **`#contacto`** — `FormularioContacto` (datos + form).
-8. **`#maps`** — iframe de Google Maps embebido.
+8. **`#ubicacion`** — bloque de texto con dirección y teléfono (antes era un iframe de Google Maps, retirado a pedido del cliente).
 9. **Footer** — copyright + WhatsApp/LinkedIn.
 
 ## Convenciones de diseño
