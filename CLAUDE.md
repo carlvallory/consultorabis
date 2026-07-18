@@ -33,14 +33,16 @@ src/
 ├── layouts/
 │   └── Layout.astro          # <html>, <head>, fuentes, ViewTransitions, slot
 ├── pages/
-│   └── index.astro           # ÚNICA página. Compone header + secciones vía componentes
+│   ├── index.astro           # ruta "/" (v1): <Layout><Home variant="static" /></Layout>
+│   └── v2.astro              # ruta "/v2" (v2): <Home variant="slider" />, con noindex
 ├── components/
+│   ├── Home.astro            # cuerpo de la página; prop variant "static"|"slider" elige grilla o carrusel
 │   ├── NavMenu.astro         # nav desktop + menú hamburguesa mobile (JS inline)
 │   ├── RevolutionSliderAstro.astro  # hero animado con GSAP (6 capas/layers)
 │   ├── QuienesSomos.astro    # sección Quiénes Somos (grilla 3 col, versión actual)
 │   ├── Servicios.astro       # sección Servicios (grilla 2×2, versión actual)
 │   ├── FormularioContacto.astro     # datos de contacto + formulario
-│   └── legacy/               # versiones anteriores en carrusel (respaldo, ver docs/alternar-sliders.md)
+│   └── legacy/               # versiones en carrusel (usadas por v2, ver docs/alternar-sliders.md)
 │       ├── QuienesSomosSlider.astro
 │       └── ServiciosSlider.astro
 ├── styles/
@@ -53,7 +55,13 @@ public/
 └── icons8-*.{png,svg}        # íconos de redes sociales / contacto
 ```
 
-## Secciones de `index.astro` (en orden)
+## Variantes v1 / v2
+
+Hay dos rutas en vivo para que el cliente compare: **`/` (v1)** con secciones en grilla
+estática y **`/v2`** con carruseles. Ambas usan el mismo `Home.astro` (prop `variant`).
+Procedimiento y cómo consolidar una vez decidido: `docs/alternar-sliders.md`.
+
+## Secciones de la página (`Home.astro`, en orden)
 
 1. **Header** — logo + `NavMenu`, sticky.
 2. **`RevolutionSliderAstro`** — hero animado con GSAP (splash screen).

@@ -1,49 +1,48 @@
-# Alternar Quiénes Somos / Servicios: grilla ↔ carrusel
+# Versiones v1 / v2 y cómo alternar grilla ↔ carrusel
 
-Las secciones **Quiénes Somos** y **Nuestros Servicios** tienen dos presentaciones
-intercambiables, y cambiar entre ellas es **una sola línea** por sección (no hace
-falta volver atrás en los commits).
+El sitio tiene **dos variantes en vivo** para que el cliente compare, servidas como
+rutas distintas en el mismo deploy:
 
-## Los componentes
+| Ruta   | Variante | Quiénes Somos y Servicios          |
+| ------ | -------- | ---------------------------------- |
+| `/`    | **v1**   | grillas estáticas (sin slider)     |
+| `/v2`  | **v2**   | carruseles (con slider)            |
 
-| Sección        | Versión ACTUAL (grilla estática)      | Versión ANTERIOR (carrusel)                     |
-| -------------- | ------------------------------------- | ----------------------------------------------- |
-| Quiénes Somos  | `src/components/QuienesSomos.astro`   | `src/components/legacy/QuienesSomosSlider.astro`|
-| Servicios      | `src/components/Servicios.astro`      | `src/components/legacy/ServiciosSlider.astro`   |
+Ambas comparten TODO lo demás (header, hero, contacto, formulario, footer, tipografía,
+colores). `/v2` lleva `noindex` para que los buscadores no lo indexen como duplicado.
 
-- **Grilla (actual):** contenido siempre visible, sin JavaScript. Quiénes Somos en 3
-  columnas; Servicios en cuadrícula 2×2.
-- **Carrusel (anterior):** un ítem por vez con flechas, dots y autoplay; usa
-  `<script is:inline>`. Ambas versiones comparten el mismo contenido de texto y el
-  mismo `id` de sección (`#quienes-somos`, `#servicios`), así que el menú sigue
-  funcionando en cualquiera de los dos modos.
+## Cómo está armado
 
-## Cómo cambiar (en `src/pages/index.astro`)
+- **`src/components/Home.astro`** — cuerpo completo de la página. Recibe una prop
+  `variant` (`"static"` | `"slider"`) y decide qué componentes de sección renderiza:
+  ```astro
+  {variant === "slider" ? <QuienesSomosSlider /> : <QuienesSomos />}
+  {variant === "slider" ? <ServiciosSlider />    : <Servicios />}
+  ```
+- **`src/pages/index.astro`** → `<Home variant="static" />`  (v1)
+- **`src/pages/v2.astro`** → `<Home variant="slider" />`  (v2, con `noindex`)
 
-En el bloque de imports de arriba, cambiá **solo la ruta del import**. El nombre local
-y la etiqueta `<QuienesSomos />` / `<Servicios />` no se tocan.
+Componentes de sección:
 
-### Quiénes Somos
+| Sección        | Grilla (estática)                   | Carrusel (slider)                               |
+| -------------- | ----------------------------------- | ----------------------------------------------- |
+| Quiénes Somos  | `src/components/QuienesSomos.astro` | `src/components/legacy/QuienesSomosSlider.astro`|
+| Servicios      | `src/components/Servicios.astro`    | `src/components/legacy/ServiciosSlider.astro`   |
 
-```diff
-- import QuienesSomos from "../components/QuienesSomos.astro";
-+ import QuienesSomos from "../components/legacy/QuienesSomosSlider.astro";
-```
+## Cuando el cliente decida
 
-### Servicios
+- **Si elige v1 (grillas):** borrar `src/pages/v2.astro`. (Opcional: mover los
+  componentes `legacy/` fuera del proyecto si ya no se quieren conservar.)
+- **Si elige v2 (carruseles):** cambiar la variante de la home a `slider`
+  en `src/pages/index.astro` (`<Home variant="slider" />`) y borrar `src/pages/v2.astro`.
 
-```diff
-- import Servicios from "../components/Servicios.astro";
-+ import Servicios from "../components/legacy/ServiciosSlider.astro";
-```
-
-Para volver a la grilla, revertí la ruta. Guardá y `npm run build` (o el deploy de
-Vercel) toma el cambio. Se pueden alternar de forma independiente (una en grilla y la
-otra en carrusel, si se quisiera).
+En cualquier caso, después de decidir queda una sola versión limpia en `/`.
 
 ## Notas
 
-- Si en el futuro se edita el **texto** de alguna sección, conviene aplicarlo en ambas
-  versiones (grilla y carrusel) para que queden sincronizadas.
-- Los componentes de `legacy/` no se compilan mientras no se importen; no afectan el
-  peso del sitio hasta que se usan.
+- Se pueden mezclar (p. ej. Quiénes Somos en grilla y Servicios en carrusel) editando el
+  render condicional de `Home.astro`, o creando variantes adicionales.
+- Si se edita el **texto** de una sección, aplicarlo en ambas versiones (grilla y
+  carrusel) para que no se desincronicen.
+- Los componentes en `legacy/` conservan el JS inline original de los carruseles
+  (incluye algunos `console.log`); es la versión anterior tal cual.

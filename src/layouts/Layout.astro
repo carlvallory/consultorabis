@@ -5,9 +5,10 @@ import { ViewTransitions } from 'astro:transitions';
 interface Props {
     title: string;
     description: string;
+    noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,6 +20,7 @@ const { title, description } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
         <meta name="description" content={description} />
+        {noindex && <meta name="robots" content="noindex" />}
         <ViewTransitions />
 
         <link rel="preconnect" href="https://fonts.googleapis.com">

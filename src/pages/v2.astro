@@ -1,11 +1,14 @@
 ---
+// v2.astro — variante con carruseles (sliders) para comparación del cliente.
+// v1 (grillas estáticas) está en index.astro (ruta "/").
 import Layout from "../layouts/Layout.astro";
 import Home from "../components/Home.astro";
 ---
 
 <Layout
-	title="Consultora Bis - Business Intelligence Services"
+	title="Consultora Bis (v2 · con sliders) - Business Intelligence Services"
 	description="Consultora Bis, tu socio estratégico en Paraguay para el desarrollo y consolidación empresarial. Servicios de asesoramiento financiero, estrategia, investigación y más."
+	noindex={true}
 >
-	<Home variant="static" />
+	<Home variant="slider" />
 </Layout>
