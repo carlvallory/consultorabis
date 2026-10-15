@@ -87,7 +87,7 @@ pueden hacer de entrada.
 
 Es el área más frágil del sitio (timeline GSAP). Respetar `prefers-reduced-motion`.
 
-- [ ] **Reemplazar la imagen pixelada** (pregunta 3). Capas e imágenes actuales:
+- [x] _(resuelto 2026-10-15: era `consultoratexto-06.png`; el archivo está bien, el pixelado venía de `image-rendering: crisp-edges` en `.slider-layer`, que se quitó)_ **Reemplazar la imagen pixelada** (pregunta 3). Capas e imágenes actuales:
 
   | Línea | Archivo (`public/content/`) | Tamaño real |
   |---|---|---|

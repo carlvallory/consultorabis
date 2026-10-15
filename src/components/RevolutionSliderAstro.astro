@@ -122,9 +122,9 @@ import { Image } from "astro:assets";
         transform-origin: center center;
         /* Prevenir distorsión de imágenes */
         object-fit: contain;
-        /* Asegurar que las imágenes mantengan su calidad */
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
+        /* Sin image-rendering: crisp-edges — las capas se muestran reducidas
+           (p. ej. consultoratexto-06 de 2338px a ~470px) y sin suavizado el
+           texto se veía pixelado. El escalado por defecto del navegador es mejor. */
     }
 
     /* Z-index específicos de Revolution Slider para superposición */
