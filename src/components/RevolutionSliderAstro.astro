@@ -181,7 +181,7 @@ import { Image } from "astro:assets";
             gsap.killTweensOf(".slider-layer");
             gsap.set(".slider-layer", { opacity: 0 });
 
-            const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
             // Anchos y altos originales de las imágenes para cálculos de superposición/posición
             const layer1OriginalWidth = 1408;
@@ -197,51 +197,11 @@ import { Image } from "astro:assets";
             const layer6OriginalWidth = 632;
             const layer6OriginalHeight = 142;
 
-            // --- ANIMACIONES DE CAPAS SUPERIORES (corporate-02.png y corporate-03.png) ---
-
-            const layer2Overlap = layer2OriginalWidth * 0.9;
-            const layer2FinalX = -layer2OriginalWidth + layer2Overlap;
-            const layer2FinalY = 0;
-
-            tl.fromTo(
-                ".layer-2",
-                {
-                    x: getResponsiveValue(-layer2OriginalWidth, true),
-                    y: getResponsiveValue(layer2FinalY, false),
-                    width: getResponsiveValue(layer2OriginalWidth, true),
-                    height: getResponsiveValue(layer2OriginalHeight, false),
-                    opacity: 1,
-                },
-                {
-                    x: getResponsiveValue(layer2FinalX, true),
-                    duration: 1.5,
-                    delay: 0.5,
-                },
-                0,
-            );
-
-            const layer1Overlap = layer1OriginalWidth * 0.9;
-            const layer1FinalX = baseWidth - layer1Overlap;
-            const layer1FinalY = 0;
-
-            tl.fromTo(
-                ".layer-1",
-                {
-                    x: getResponsiveValue(baseWidth, true),
-                    y: getResponsiveValue(layer1FinalY, false),
-                    width: getResponsiveValue(layer1OriginalWidth, true),
-                    height: getResponsiveValue(layer1OriginalHeight, false),
-                    opacity: 1,
-                },
-                {
-                    x: getResponsiveValue(layer1FinalX, true),
-                    duration: 1.5,
-                    delay: 0.5,
-                },
-                0,
-            );
-
-            // --- ANIMACIONES CENTRALES (arrow-black-01.png, arrow-red-01.png, logo-rows-05.png) ---
+            // Coreografía (~3,5 s): cada capa entra mientras la anterior sale,
+            // con movimiento continuo hacia arriba (bandas → flecha negra →
+            // flecha roja → logo → texto). Entradas con ease-out (frenan al
+            // llegar), salidas con ease-in (aceleran al irse). Los tiempos van
+            // como posición absoluta en la timeline (3er argumento).
 
             const getCenteredXPos = (layerWidth) => {
                 const currentContainerWidth = sliderContainer.offsetWidth;
@@ -251,107 +211,164 @@ import { Image } from "astro:assets";
                 );
             };
 
-            const layer3CenteredX = getCenteredXPos(layer3OriginalWidth);
-            const layer3FinalY = baseHeight / 1.15 - layer3OriginalHeight;
+            const getCenteredPos = (layerWidth, layerHeight) => {
+                const currentContainerHeight = sliderContainer.offsetHeight;
+                return {
+                    x: getCenteredXPos(layerWidth),
+                    y:
+                        currentContainerHeight / 2 -
+                        getResponsiveValue(layerHeight, false) / 2,
+                };
+            };
 
+            const size = (w, h) => ({
+                width: getResponsiveValue(w, true),
+                height: getResponsiveValue(h, false),
+            });
+
+            // --- BANDAS SUPERIORES (corporate-02.png y corporate-03.png) ---
+            // Entran desde los costados y frenan al encontrarse.
+
+            const layer2FinalX = -layer2OriginalWidth * 0.1;
+            tl.fromTo(
+                ".layer-2",
+                {
+                    x: getResponsiveValue(-layer2OriginalWidth, true),
+                    y: 0,
+                    ...size(layer2OriginalWidth, layer2OriginalHeight),
+                    opacity: 1,
+                },
+                {
+                    x: getResponsiveValue(layer2FinalX, true),
+                    duration: 1.2,
+                    ease: "expo.out",
+                },
+                0.1,
+            );
+
+            const layer1FinalX = baseWidth - layer1OriginalWidth * 0.9;
+            tl.fromTo(
+                ".layer-1",
+                {
+                    x: getResponsiveValue(baseWidth, true),
+                    y: 0,
+                    ...size(layer1OriginalWidth, layer1OriginalHeight),
+                    opacity: 1,
+                },
+                {
+                    x: getResponsiveValue(layer1FinalX, true),
+                    duration: 1.2,
+                    ease: "expo.out",
+                },
+                0.1,
+            );
+
+            // --- FLECHA NEGRA (arrow-black-01.png) ---
+            // Sube desde abajo mientras las bandas terminan de entrar.
+
+            const layer3X = getCenteredXPos(layer3OriginalWidth);
+            const layer3FinalY = getResponsiveValue(
+                baseHeight / 1.15 - layer3OriginalHeight,
+                false,
+            );
             tl.fromTo(
                 ".layer-3",
                 {
+                    x: layer3X,
                     y: getResponsiveValue(baseHeight, false),
-                    x: layer3CenteredX,
-                    width: getResponsiveValue(layer3OriginalWidth, true),
-                    height: getResponsiveValue(layer3OriginalHeight, false),
+                    ...size(layer3OriginalWidth, layer3OriginalHeight),
                     opacity: 0,
                 },
+                { y: layer3FinalY, opacity: 1, duration: 0.8 },
+                0.7,
+            );
+
+            // --- FLECHA NEGRA → FLECHA ROJA (arrow-red-01.png) ---
+            // La negra sigue subiendo y se desvanece; la roja nace a la altura
+            // de su punta y completa el mismo movimiento hacia arriba.
+
+            tl.to(
+                ".layer-3",
                 {
-                    y: getResponsiveValue(layer3FinalY, false),
-                    opacity: 1,
-                    duration: 1.5,
-                    delay: 2.0,
+                    y: layer3FinalY - getResponsiveValue(40, false),
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: "power2.in",
                 },
-            ).to(".layer-3", {
-                opacity: 0,
-                duration: 0.5,
-                delay: 0.5,
-            });
+                1.6,
+            );
 
-            const getCenteredPos = (layerWidth, layerHeight) => {
-                const currentContainerWidth = sliderContainer.offsetWidth;
-                const currentContainerHeight = sliderContainer.offsetHeight;
-                const finalX =
-                    currentContainerWidth / 2 -
-                    getResponsiveValue(layerWidth, true) / 2;
-                const finalY =
-                    currentContainerHeight / 2 -
-                    getResponsiveValue(layerHeight, false) / 2;
-                return { x: finalX, y: finalY };
-            };
-
-            const layer4CenteredPos = getCenteredPos(
+            const layer4Pos = getCenteredPos(
                 layer4OriginalWidth,
                 layer4OriginalHeight,
             );
-
             tl.fromTo(
                 ".layer-4",
                 {
-                    y: layer4CenteredPos.y,
-                    x: layer4CenteredPos.x,
-                    width: getResponsiveValue(layer4OriginalWidth, true),
-                    height: getResponsiveValue(layer4OriginalHeight, false),
+                    x: layer4Pos.x,
+                    y: layer4Pos.y + getResponsiveValue(40, false),
+                    ...size(layer4OriginalWidth, layer4OriginalHeight),
                     opacity: 0,
                 },
-                {
-                    opacity: 1,
-                    duration: 0.88,
-                    delay: "<",
-                },
-            ).to(".layer-4", {
-                opacity: 0,
-                duration: 0.5,
-                delay: 1.4, // Espera a que layer-5 aparezca (0.92s) + 0.5s extra
-            });
+                { y: layer4Pos.y, opacity: 1, duration: 0.5 },
+                1.65,
+            );
 
-            const layer5CenteredPos = getCenteredPos(
+            // --- FLECHA ROJA → LOGO (logo-rows-05.png) ---
+            // El logo arranca al tamaño de la flecha roja (escala 0,55) y crece
+            // hasta su tamaño final, como si la flecha "se desplegara".
+
+            tl.to(
+                ".layer-4",
+                {
+                    y: layer4Pos.y - getResponsiveValue(15, false),
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power2.in",
+                },
+                2.25,
+            );
+
+            const layer5Pos = getCenteredPos(
                 layer5OriginalWidth,
                 layer5OriginalHeight,
             );
-
             tl.fromTo(
                 ".layer-5",
                 {
-                    y: layer5CenteredPos.y,
-                    x: layer5CenteredPos.x,
-                    width: getResponsiveValue(layer5OriginalWidth, true),
-                    height: getResponsiveValue(layer5OriginalHeight, false),
+                    x: layer5Pos.x,
+                    y: layer5Pos.y + getResponsiveValue(10, false),
+                    ...size(layer5OriginalWidth, layer5OriginalHeight),
+                    scale: 0.55,
                     opacity: 0,
                 },
                 {
+                    y: layer5Pos.y,
+                    scale: 1,
                     opacity: 1,
-                    duration: 0.92,
-                    delay: "<0.5",
+                    duration: 0.7,
+                    ease: "back.out(1.4)",
                 },
+                2.2,
             );
 
-            // --- ANIMACIÓN DEL TEXTO (consultoratexto-06.png) ---
+            // --- TEXTO (consultoratexto-06.png) ---
+            // Entra deslizándose levemente desde abajo cuando el logo se asienta.
 
-            const layer6FinalY = baseHeight - layer6OriginalHeight * 1.5;
-            const layer6CenteredX = getCenteredXPos(layer6OriginalWidth);
-
+            const layer6FinalY = getResponsiveValue(
+                baseHeight - layer6OriginalHeight * 1.5,
+                false,
+            );
             tl.fromTo(
                 ".layer-6",
                 {
-                    y: getResponsiveValue(layer6FinalY, false),
-                    x: layer6CenteredX,
-                    width: getResponsiveValue(layer6OriginalWidth, true),
-                    height: getResponsiveValue(layer6OriginalHeight, false),
+                    x: getCenteredXPos(layer6OriginalWidth),
+                    y: layer6FinalY + getResponsiveValue(25, false),
+                    ...size(layer6OriginalWidth, layer6OriginalHeight),
                     opacity: 0,
                 },
-                {
-                    opacity: 1,
-                    duration: 1,
-                    delay: "<0.5",
-                },
+                { y: layer6FinalY, opacity: 1, duration: 0.7 },
+                2.7,
             );
 
             // Respeta la preferencia de movimiento reducido: salta al estado

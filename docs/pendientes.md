@@ -102,7 +102,7 @@ Es el área más frágil del sitio (timeline GSAP). Respetar `prefers-reduced-mo
   grande en desktop/retina. Confirmar con el usuario o comparar tamaño renderizado vs.
   real en DevTools. Ojo: también existe `public/content/cosultora-bis.png` (1536×1024,
   2.3 MB, con typo en el nombre), usada en `Home.astro:49` fuera del hero; no confundir.
-- [ ] **Mejorar la animación** (pregunta 4). No cambiar nada sin una indicación concreta
+- [x] _(2026-10-15, rama `feat/hero-animacion`, pendiente de aprobación del cliente: ~3,5 s en vez de ~11, transiciones encadenadas con movimiento hacia arriba)_ **Mejorar la animación** (pregunta 4). No cambiar nada sin una indicación concreta
   del usuario. Probar en desktop y mobile, y con reduced-motion activado.
 
 ## 5. Favicon
