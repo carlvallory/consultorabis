@@ -49,7 +49,7 @@ pueden hacer de entrada.
   - La versión en carrusel `src/components/legacy/QuienesSomosSlider.astro` (usada por
     `/v2`) también tiene slides de Misión y Visión: preguntar si se borran ahí también
     (lo lógico es que sí, para que v1 y v2 muestren el mismo contenido).
-- [ ] **Escribir "BIS" en mayúsculas** ("Consultora BIS"). Ocurrencias visibles hoy:
+- [x] _(hecho 2026-10-15, en todo el sitio)_ **Escribir "BIS" en mayúsculas** ("Consultora BIS"). Ocurrencias visibles hoy:
   - `src/components/QuienesSomos.astro` — `<h3>` "Consultora Bis".
   - `src/components/legacy/QuienesSomosSlider.astro:34` — `<h3>` del slide.
   - `src/components/Home.astro:22` — `alt="Logo Consultora Bis"`.
@@ -62,7 +62,7 @@ pueden hacer de entrada.
 
 ## 2. Contacto — enlace a LinkedIn
 
-- [ ] Agregar el enlace de LinkedIn que mandó el cliente: `https://lnkd.in/p/dS3vk89E`.
+- [x] _(hecho 2026-10-15: botón en `#contactanos`; el footer no se tocó)_ Agregar el enlace de LinkedIn que mandó el cliente: `https://lnkd.in/p/dS3vk89E`.
   - Hoy hay **un solo** LinkedIn en el sitio: footer, `src/components/Home.astro:175`,
     apuntando a `https://py.linkedin.com/company/consultora-bis`.
   - Depende de la pregunta 2. Si se agrega en `#contactanos`, copiar el estilo de los
@@ -107,7 +107,7 @@ Es el área más frágil del sitio (timeline GSAP). Respetar `prefers-reduced-mo
 
 ## 5. Favicon
 
-- [ ] Reemplazar `public/favicon.svg`, que hoy es **el logo por defecto de Astro**.
+- [x] _(hecho 2026-10-15: favicon.ico/PNG + apple-touch-icon derivados de `public/exports/logo-web-02.png`)_ Reemplazar `public/favicon.svg`, que hoy es **el logo por defecto de Astro**.
   - Se referencia en `src/layouts/Layout.astro:19`
     (`<link rel="icon" type="image/svg+xml" href="/favicon.svg" />`).
   - Depende de la pregunta 5. El único logo disponible es `public/logo.png` (269×65,

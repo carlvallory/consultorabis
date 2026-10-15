@@ -51,7 +51,7 @@ src/
     └── helpers.js            # vacío (solo un comentario), reservado para uso futuro
 public/
 ├── content/                  # imágenes del hero (corporate-*, arrow-*, logo-rows, consultoratexto) y cosultora-bis.png
-├── logo.png, favicon.svg
+├── logo.png, favicon.ico, favicon-32x32.png, icon-192.png, apple-touch-icon.png  # íconos derivados de exports/logo-web-02.png
 └── icons8-*.{png,svg}        # íconos de redes sociales / contacto
 ```
 
@@ -68,7 +68,7 @@ Procedimiento y cómo consolidar una vez decidido: `docs/alternar-sliders.md`.
 3. **Banner hero** — frase de valor sobre gradiente de marca.
 4. **`#quienes-somos`** — `<QuienesSomos />`: un único bloque centrado ("Consultora Bis") con filete de acento superior. Misión y Visión se quitaron a pedido del cliente (2026-10-13). Se usa igual en v1 y v2; el carrusel `legacy/QuienesSomosSlider.astro` queda solo como respaldo.
 5. **`#servicios`** — `<Servicios />`: grilla 2×2 de 4 servicios en tarjetas (Asesoramiento Financiero, Estudios de Mercado, Elaboración y Evaluación de Proyectos, Capacitación). Contenido estático, sin JS. Tiene versión alterna en carrusel (`legacy/`).
-6. **`#contactanos`** — sección blanca con CTA + botones a Instagram y Facebook. Destino del enlace "Contáctanos" del menú.
+6. **`#contactanos`** — sección blanca con CTA + botones a Instagram, Facebook y LinkedIn (`lnkd.in/p/dS3vk89E`; el del footer sigue apuntando a la página de empresa). Destino del enlace "Contáctanos" del menú.
 7. **`#contacto`** — `FormularioContacto` (datos de contacto + formulario Web3Forms).
 8. **Footer** — copyright + WhatsApp/LinkedIn.
 
