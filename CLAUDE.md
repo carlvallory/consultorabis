@@ -39,11 +39,11 @@ src/
 │   ├── Home.astro            # cuerpo de la página; prop variant "static"|"slider" elige grilla o carrusel
 │   ├── NavMenu.astro         # nav desktop + menú hamburguesa mobile (JS inline)
 │   ├── RevolutionSliderAstro.astro  # hero animado con GSAP (6 capas/layers)
-│   ├── QuienesSomos.astro    # sección Quiénes Somos (grilla 3 col, versión actual)
+│   ├── QuienesSomos.astro    # sección Quiénes Somos (bloque único centrado, v1 y v2)
 │   ├── Servicios.astro       # sección Servicios (grilla 2×2, versión actual)
 │   ├── FormularioContacto.astro     # datos de contacto + formulario
 │   └── legacy/               # versiones en carrusel (usadas por v2, ver docs/alternar-sliders.md)
-│       ├── QuienesSomosSlider.astro
+│       ├── QuienesSomosSlider.astro  # respaldo histórico, ya no se renderiza
 │       └── ServiciosSlider.astro
 ├── styles/
 │   └── global.css            # estilos base, tipografías, overrides de Tailwind
@@ -66,12 +66,11 @@ Procedimiento y cómo consolidar una vez decidido: `docs/alternar-sliders.md`.
 1. **Header** — logo + `NavMenu`, sticky.
 2. **`RevolutionSliderAstro`** — hero animado con GSAP (splash screen).
 3. **Banner hero** — frase de valor sobre gradiente de marca.
-4. **`#quienes-somos`** — `<QuienesSomos />`: grilla de 3 columnas (Empresa / Misión / Visión) con filete de acento superior. Contenido estático, sin JS. Tiene versión alterna en carrusel (`legacy/`, ver `docs/alternar-sliders.md`).
+4. **`#quienes-somos`** — `<QuienesSomos />`: un único bloque centrado ("Consultora Bis") con filete de acento superior. Misión y Visión se quitaron a pedido del cliente (2026-10-13). Se usa igual en v1 y v2; el carrusel `legacy/QuienesSomosSlider.astro` queda solo como respaldo.
 5. **`#servicios`** — `<Servicios />`: grilla 2×2 de 4 servicios en tarjetas (Asesoramiento Financiero, Estudios de Mercado, Elaboración y Evaluación de Proyectos, Capacitación). Contenido estático, sin JS. Tiene versión alterna en carrusel (`legacy/`).
 6. **`#contactanos`** — sección blanca con CTA + botones a Instagram y Facebook. Destino del enlace "Contáctanos" del menú.
 7. **`#contacto`** — `FormularioContacto` (datos de contacto + formulario Web3Forms).
-8. **`#ubicacion`** — bloque de texto con dirección y teléfono (antes era un iframe de Google Maps, retirado a pedido del cliente).
-9. **Footer** — copyright + WhatsApp/LinkedIn.
+8. **Footer** — copyright + WhatsApp/LinkedIn.
 
 ## Convenciones de diseño
 
@@ -79,7 +78,7 @@ Procedimiento y cómo consolidar una vez decidido: `docs/alternar-sliders.md`.
   `logo-principal #db4f58`, `logo-secundario #e55e4b`, `logo-acento #fbc8b0`.
 - Gradiente de marca recurrente: `bg-gradient-to-r from-logo-principal to-logo-secundario`.
 - **Sin sombras en todo el sitio** y esquinas redondeadas coherentes (decisión de diseño del cliente). No usar clases `shadow-*`; para separar zonas usar bordes sutiles (`border-b`/`border-t`).
-- **Único JS de UI:** la animación GSAP del hero (`RevolutionSliderAstro`), que respeta `prefers-reduced-motion`. Las secciones Quiénes Somos y Servicios son grillas estáticas (ya no hay carruseles ni JS inline).
+- **Único JS de UI:** la animación GSAP del hero (`RevolutionSliderAstro`), que respeta `prefers-reduced-motion`. En `/` (v1) Quiénes Somos y Servicios son estáticas; `/v2` usa el carrusel de Servicios (JS inline en `legacy/ServiciosSlider.astro`).
 
 ## Trabajo reciente (git)
 

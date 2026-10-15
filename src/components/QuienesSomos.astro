@@ -1,5 +1,6 @@
 ---
-// QuienesSomos.astro — versión ACTUAL (grilla estática).
+// QuienesSomos.astro — versión ACTUAL (bloque único estático; Misión y Visión
+// se quitaron a pedido del cliente el 2026-10-13).
 // La versión anterior en carrusel está en components/legacy/QuienesSomosSlider.astro.
 // Para alternar entre ambas: ver docs/alternar-sliders.md
 ---
@@ -13,9 +14,9 @@
 			Quiénes Somos
 		</h2>
 
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+		<div class="max-w-3xl mx-auto">
 			<!-- Consultora Bis -->
-			<div class="border-t-2 border-logo-acento pt-6 text-center md:text-left">
+			<div class="border-t-2 border-logo-acento pt-6 text-center">
 				<h3 class="text-2xl font-semibold text-logo-secundario mb-3">
 					Consultora Bis
 				</h3>
@@ -30,41 +31,6 @@
 					mediante análisis rigurosos, estructuración
 					financiera sólida y acompañamiento estratégico en
 					la toma de decisiones.
-				</p>
-			</div>
-			<!-- Misión -->
-			<div class="border-t-2 border-logo-acento pt-6 text-center md:text-left">
-				<h3 class="text-2xl font-semibold text-logo-secundario mb-3">
-					Misión
-				</h3>
-				<p class="text-gray-700">
-					Acompañar a empresas y particulares en la
-					<strong class="text-logo-secundario"
-						>evaluación, estructuración y gestión de
-						proyectos de inversión</strong
-					>, aportando rigor técnico, análisis financiero
-					sólido y soluciones a medida que faciliten
-					<strong class="text-logo-secundario"
-						>decisiones bien fundamentadas y sostenibles en
-						el tiempo</strong
-					>.
-				</p>
-			</div>
-			<!-- Visión -->
-			<div class="border-t-2 border-logo-acento pt-6 text-center md:text-left">
-				<h3 class="text-2xl font-semibold text-logo-secundario mb-3">
-					Visión
-				</h3>
-				<p class="text-gray-700">
-					Consolidarnos como una <strong
-						class="text-logo-secundario"
-						>firma de referencia</strong
-					> en asesoramiento económico y financiero,
-					destacada por su rigor analítico, independencia de
-					criterio y compromiso con la <strong
-						class="text-logo-secundario"
-						>generación de valor sostenible</strong
-					> para nuestros clientes.
 				</p>
 			</div>
 		</div>

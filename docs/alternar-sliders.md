@@ -3,7 +3,7 @@
 El sitio tiene **dos variantes en vivo** para que el cliente compare, servidas como
 rutas distintas en el mismo deploy:
 
-| Ruta   | Variante | Quiénes Somos y Servicios          |
+| Ruta   | Variante | Servicios                          |
 | ------ | -------- | ---------------------------------- |
 | `/`    | **v1**   | grillas estáticas (sin slider)     |
 | `/v2`  | **v2**   | carruseles (con slider)            |
@@ -16,11 +16,16 @@ colores). `/v2` lleva `noindex` para que los buscadores no lo indexen como dupli
 - **`src/components/Home.astro`** — cuerpo completo de la página. Recibe una prop
   `variant` (`"static"` | `"slider"`) y decide qué componentes de sección renderiza:
   ```astro
-  {variant === "slider" ? <QuienesSomosSlider /> : <QuienesSomos />}
+  <QuienesSomos />  // igual en ambas variantes
   {variant === "slider" ? <ServiciosSlider />    : <Servicios />}
   ```
 - **`src/pages/index.astro`** → `<Home variant="static" />`  (v1)
 - **`src/pages/v2.astro`** → `<Home variant="slider" />`  (v2, con `noindex`)
+
+> **2026-10-13:** a pedido del cliente se quitaron Misión y Visión. Quiénes Somos quedó
+> como un solo bloque y ya no tiene sentido en carrusel, así que ambas variantes usan
+> `QuienesSomos.astro`. `QuienesSomosSlider.astro` se conserva como respaldo (todavía
+> con los textos de Misión/Visión) pero no se renderiza.
 
 Componentes de sección:
 

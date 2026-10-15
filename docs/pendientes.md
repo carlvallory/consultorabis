@@ -39,7 +39,7 @@ pueden hacer de entrada.
 
 ## 1. Quiénes Somos — `src/components/QuienesSomos.astro`
 
-- [ ] **Borrar las columnas Misión y Visión.** Queda solo el bloque "Consultora Bis".
+- [x] **Borrar las columnas Misión y Visión.** _(hecho 2026-10-15; v2 también usa el bloque único)_ Queda solo el bloque "Consultora Bis".
   - Los bloques están marcados con `<!-- Misión -->` y `<!-- Visión -->`.
   - Al quedar una sola columna, cambiar la grilla `grid-cols-1 md:grid-cols-3` por un
     layout de una columna centrado (p. ej. `max-w-3xl mx-auto`) para que el texto no
@@ -72,7 +72,7 @@ pueden hacer de entrada.
 
 ## 3. Borrar "Dónde Encontrarnos" — `#ubicacion`
 
-- [ ] Borrar la `<section id="ubicacion">` completa de `src/components/Home.astro`
+- [x] _(hecho 2026-10-15; también se quitó el `border-b` de `#contacto`)_ Borrar la `<section id="ubicacion">` completa de `src/components/Home.astro`
   (~líneas 111-149, desde `<section id="ubicacion"` hasta su `</section>`, justo antes de
   `</main>`).
   - `NavMenu.astro` **no** tiene enlace a `#ubicacion` (solo Quiénes Somos, Servicios,
