@@ -4,6 +4,7 @@
 // variant="slider" -> Servicios en carrusel (Quiénes Somos es un bloque único en ambas)
 // hero="nuevo"      -> animación nueva del hero (RevolutionSliderAstro)
 // hero="original"   -> réplica del hero del sitio WordPress original (ruta /original)
+// hero="combinada"  -> animación original con el alto del hero nuevo (ruta /combinada)
 import NavMenu from "./NavMenu.astro";
 import RevolutionSliderAstro from "./RevolutionSliderAstro.astro";
 import RevolutionSliderOriginal from "./RevolutionSliderOriginal.astro";
@@ -30,7 +31,13 @@ const { variant = "static", hero = "nuevo" } = Astro.props;
 		<NavMenu />
 	</div>
 </header>
-{hero === "original" ? <RevolutionSliderOriginal /> : <RevolutionSliderAstro />}
+{hero === "original" ? (
+	<RevolutionSliderOriginal />
+) : hero === "combinada" ? (
+	<RevolutionSliderOriginal alto="nuevo" />
+) : (
+	<RevolutionSliderAstro />
+)}
 <main class="flex-grow w-full">
 	<section
 		class="bg-gradient-to-r from-logo-principal to-logo-secundario text-white py-20 px-4 text-center w-full relative overflow-hidden"

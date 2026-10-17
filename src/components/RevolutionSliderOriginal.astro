@@ -5,8 +5,14 @@
 // Posiciones, tamaños, tiempos y easings salen tal cual de los data-* de cada
 // rs-layer, sobre la grilla original de 1240×500 px. Sirve para mostrarle al
 // cliente la animación "old" junto a la nueva (RevolutionSliderAstro.astro).
-// El alto del contenedor es el del hero nuevo (pedido del cliente, 2026-10-17).
+//
+// Prop alto:
+//   "original" (por defecto) -> alto del sitio viejo: 500 px, se achica bajo 1240 px (/original)
+//   "nuevo"                  -> alto del hero nuevo (1920/775 desktop, 16/9 mobile),
+//                               con la grilla escalada para llenarlo (/combinada)
 import { Image } from "astro:assets";
+
+const { alto = "original" } = Astro.props;
 
 // x, y, w, h: data-xy / data-dim del original (px sobre la grilla de 1240×500).
 const layers = [
@@ -19,7 +25,7 @@ const layers = [
 ];
 ---
 
-<div class="orig-hero">
+<div class:list={["orig-hero", { "orig-hero--alto-nuevo": alto === "nuevo" }]} data-alto={alto}>
     <div class="orig-stage">
         {
             layers.map((l, i) => (
@@ -43,25 +49,31 @@ const layers = [
 </div>
 
 <style>
-    /* Alto del contenedor igual al del hero nuevo (RevolutionSliderAstro):
-       1920/775 en desktop y 16/9 en mobile, con mínimos y máximo. La grilla
-       original de 1240×500 se escala entera para llenarlo (casi la misma
-       proporción que 1920/775) y queda centrada. */
+    /* Alto original: layout "fullwidth" de Revolution Slider, la grilla de
+       1240×500 queda centrada y, por debajo de 1240 px de ancho, se achica. */
     .orig-hero {
         --orig-scale: 1;
         position: relative;
         width: 100%;
+        height: calc(500px * var(--orig-scale));
+        overflow: hidden;
+        background: #ffffff;
+    }
+
+    /* Alto nuevo: igual al de RevolutionSliderAstro (1920/775 en desktop, 16/9
+       en mobile, con mínimos y máximo). La grilla se escala entera para
+       llenarlo (1240/500 es casi la misma proporción que 1920/775). */
+    .orig-hero--alto-nuevo {
+        height: auto;
         max-width: 1920px;
         aspect-ratio: 16 / 9;
         min-height: 300px;
         max-height: 800px;
         margin: 0 auto;
-        overflow: hidden;
-        background: #ffffff;
     }
 
     @media (min-width: 768px) {
-        .orig-hero {
+        .orig-hero--alto-nuevo {
             aspect-ratio: 1920 / 775;
             min-height: 400px;
         }
@@ -95,9 +107,13 @@ const layers = [
         const GRID_W = 1240;
         const GRID_H = 500;
 
-        // La grilla entra entera en el contenedor (puede agrandarse o achicarse).
+        // Alto original: solo se achica por ancho. Alto nuevo: la grilla entra
+        // entera en el contenedor (puede agrandarse o achicarse).
+        const altoNuevo = hero.dataset.alto === "nuevo";
         const getScale = () =>
-            Math.min(hero.offsetWidth / GRID_W, hero.offsetHeight / GRID_H);
+            altoNuevo
+                ? Math.min(hero.offsetWidth / GRID_W, hero.offsetHeight / GRID_H)
+                : Math.min(1, hero.offsetWidth / GRID_W);
         const setScale = () =>
             hero.style.setProperty("--orig-scale", String(getScale()));
 

@@ -1,0 +1,14 @@
+---
+// combinada.astro — igual que "/" (v1) pero con la animación del hero del sitio
+// WordPress original y el alto del hero nuevo (tercera opción para el cliente).
+import Layout from "../layouts/Layout.astro";
+import Home from "../components/Home.astro";
+---
+
+<Layout
+	title="Consultora BIS (hero combinado) - Business Intelligence Services"
+	description="Consultora BIS, tu socio estratégico en Paraguay para el desarrollo y consolidación empresarial. Servicios de asesoramiento financiero, estrategia, investigación y más."
+	noindex={true}
+>
+	<Home variant="static" hero="combinada" />
+</Layout>

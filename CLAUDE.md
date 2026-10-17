@@ -35,12 +35,13 @@ src/
 ├── pages/
 │   ├── index.astro           # ruta "/" (v1): <Layout><Home variant="static" /></Layout>
 │   ├── v2.astro              # ruta "/v2" (v2): <Home variant="slider" />, con noindex
-│   └── original.astro        # ruta "/original": v1 con el hero del sitio WordPress viejo, con noindex
+│   ├── original.astro        # ruta "/original": v1 con el hero del sitio WordPress viejo, con noindex
+│   └── combinada.astro       # ruta "/combinada": animación vieja + alto del hero nuevo, con noindex
 ├── components/
 │   ├── Home.astro            # cuerpo de la página; prop variant "static"|"slider" elige grilla o carrusel
 │   ├── NavMenu.astro         # nav desktop + menú hamburguesa mobile (JS inline)
 │   ├── RevolutionSliderAstro.astro  # hero animado con GSAP (6 capas/layers)
-│   ├── RevolutionSliderOriginal.astro  # réplica fiel del hero WordPress (archive.org 2023), prop hero="original"
+│   ├── RevolutionSliderOriginal.astro  # réplica fiel del hero WordPress (archive.org 2023); prop alto="original"|"nuevo"
 │   ├── QuienesSomos.astro    # sección Quiénes Somos (bloque único centrado, v1 y v2)
 │   ├── Servicios.astro       # sección Servicios (grilla 2×2, versión actual)
 │   ├── FormularioContacto.astro     # datos de contacto + formulario
