@@ -1,38 +1,101 @@
 ---
 // QuienesSomos.astro — versión ACTUAL (bloque único estático; Misión y Visión
 // se quitaron a pedido del cliente el 2026-10-13).
+// 2026-10-17: prueba más llamativa — dos columnas (texto + emblema del logo),
+// tres pilares sacados del mismo párrafo y fondo durazno tenue.
 // La versión anterior en carrusel está en components/legacy/QuienesSomosSlider.astro.
 // Para alternar entre ambas: ver docs/alternar-sliders.md
+import { Image } from "astro:assets";
+
+const pilares = [
+	{
+		titulo: "Análisis riguroso",
+		texto: "Estudiamos cada proyecto a fondo antes de recomendar.",
+		// lupa
+		icono: "M10.5 3a7.5 7.5 0 0 1 5.92 12.1l4.24 4.24-1.42 1.42-4.24-4.24A7.5 7.5 0 1 1 10.5 3zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11z",
+	},
+	{
+		titulo: "Estructuración financiera sólida",
+		texto: "Diseñamos el esquema financiero que hace viable la inversión.",
+		// barras
+		icono: "M4 20h16v2H4v-2zm1-8h3v6H5v-6zm5.5-5h3v11h-3V7zM16 3h3v15h-3V3z",
+	},
+	{
+		titulo: "Acompañamiento estratégico",
+		texto: "Te acompañamos en la toma de decisiones, de principio a fin.",
+		// flecha ascendente
+		icono: "M3 17.6 9.3 11.3l4 4L19.6 9H16V7h7v7h-2v-3.6l-7.7 7.7-4-4L4.4 19 3 17.6z",
+	},
+];
 ---
 
 <section
 	id="quienes-somos"
-	class="py-16 px-4 bg-white w-full border-b border-gray-100"
+	class="py-16 md:py-20 px-4 bg-logo-acento/20 w-full border-b border-logo-acento/40"
 >
 	<div class="container mx-auto max-w-6xl">
-		<h2 class="text-logo-secundario text-3xl font-bold text-center mb-12">
-			Quiénes Somos
-		</h2>
-
-		<div class="max-w-3xl mx-auto">
-			<!-- Consultora BIS -->
-			<div class="border-t-2 border-logo-acento pt-6 text-center">
-				<h3 class="text-2xl font-semibold text-logo-secundario mb-3">
-					Consultora BIS
-				</h3>
-				<p class="text-gray-700">
-					Somos un <strong class="text-logo-secundario"
-						>equipo multidisciplinario</strong
-					>, con sólida experiencia en temas de carácter
-					<strong class="text-logo-secundario"
-						>económico y financiero</strong
-					>. Ayudamos a empresas y particulares a enfrentar
-					los desafíos de invertir en proyectos complejos,
-					mediante análisis rigurosos, estructuración
-					financiera sólida y acompañamiento estratégico en
-					la toma de decisiones.
+		<div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-12 items-center">
+			<div class="md:col-span-3 text-center md:text-left">
+				<p
+					class="text-logo-principal text-sm font-semibold uppercase tracking-widest mb-3"
+				>
+					Quiénes Somos
+				</p>
+				<h2
+					class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-5"
+				>
+					Equipo multidisciplinario en
+					<span class="text-logo-secundario">economía y finanzas</span>
+				</h2>
+				<p class="text-gray-700 text-lg leading-relaxed">
+					En <strong class="text-logo-secundario">Consultora BIS</strong>
+					contamos con sólida experiencia en temas de carácter económico y
+					financiero. Ayudamos a empresas y particulares a enfrentar los
+					desafíos de invertir en proyectos complejos, mediante análisis
+					rigurosos, estructuración financiera sólida y acompañamiento
+					estratégico en la toma de decisiones.
 				</p>
 			</div>
+
+			<div class="md:col-span-2 flex justify-center">
+				<div
+					class="bg-white rounded-full p-10 md:p-12 border border-logo-acento"
+				>
+					<Image
+						src="/content/logo-rows-05.png"
+						alt=""
+						width={220}
+						height={227}
+						class="w-36 md:w-52 h-auto"
+						loading="lazy"
+						densities={[1, 2]}
+					/>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-10 border-t border-logo-acento"
+		>
+			{
+				pilares.map((p) => (
+					<div class="bg-white rounded-lg p-6 text-center sm:text-left">
+						<div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-logo-principal to-logo-secundario mb-4">
+							<svg
+								viewBox="0 0 24 24"
+								class="w-6 h-6 fill-white"
+								aria-hidden="true"
+							>
+								<path d={p.icono} />
+							</svg>
+						</div>
+						<h3 class="text-lg font-semibold text-logo-secundario mb-1">
+							{p.titulo}
+						</h3>
+						<p class="text-gray-600">{p.texto}</p>
+					</div>
+				))
+			}
 		</div>
 	</div>
 </section>
