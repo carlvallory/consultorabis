@@ -108,11 +108,14 @@ const layers = [
         const GRID_H = 500;
 
         // Alto original: solo se achica por ancho. Alto nuevo: la grilla entra
-        // entera en el contenedor (puede agrandarse o achicarse).
+        // entera en el contenedor (puede agrandarse o achicarse) y se reduce
+        // un 10% más porque llenándolo del todo se veía demasiado grande.
         const altoNuevo = hero.dataset.alto === "nuevo";
+        const ESCALA_ALTO_NUEVO = 0.9;
         const getScale = () =>
             altoNuevo
-                ? Math.min(hero.offsetWidth / GRID_W, hero.offsetHeight / GRID_H)
+                ? ESCALA_ALTO_NUEVO *
+                  Math.min(hero.offsetWidth / GRID_W, hero.offsetHeight / GRID_H)
                 : Math.min(1, hero.offsetWidth / GRID_W);
         const setScale = () =>
             hero.style.setProperty("--orig-scale", String(getScale()));
