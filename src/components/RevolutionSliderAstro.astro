@@ -264,7 +264,8 @@ import { Image } from "astro:assets";
             );
 
             // --- FLECHA NEGRA (arrow-black-01.png) ---
-            // Sube desde abajo mientras las bandas terminan de entrar.
+            // Sube desde abajo mientras las bandas terminan de entrar, y a la
+            // vez se va desvaneciendo de forma pareja (opacidad 1 → 0,1).
 
             const layer3X = getCenteredXPos(layer3OriginalWidth);
             const layer3FinalY = getResponsiveValue(
@@ -277,15 +278,20 @@ import { Image } from "astro:assets";
                     x: layer3X,
                     y: getResponsiveValue(baseHeight, false),
                     ...size(layer3OriginalWidth, layer3OriginalHeight),
-                    opacity: 0,
+                    opacity: 1,
                 },
-                { y: layer3FinalY, opacity: 1, duration: 0.8 },
+                { y: layer3FinalY, duration: 0.8 },
+                0.7,
+            );
+            tl.to(
+                ".layer-3",
+                { opacity: 0.1, duration: 0.8, ease: "none" },
                 0.7,
             );
 
             // --- FLECHA NEGRA → FLECHA ROJA (arrow-red-01.png) ---
-            // La negra sigue subiendo y se desvanece; la roja nace a la altura
-            // de su punta y completa el mismo movimiento hacia arriba.
+            // La negra sigue subiendo y termina de desaparecer (0,1 → 0); la
+            // roja nace a la altura de su punta y completa el movimiento.
 
             tl.to(
                 ".layer-3",
