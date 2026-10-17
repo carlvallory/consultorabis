@@ -2,14 +2,17 @@
 // Home.astro — cuerpo de la página, compartido entre las variantes v1 y v2.
 // variant="static" -> secciones en grilla (sin slider)
 // variant="slider" -> Servicios en carrusel (Quiénes Somos es un bloque único en ambas)
+// hero="nuevo"      -> animación nueva del hero (RevolutionSliderAstro)
+// hero="original"   -> réplica del hero del sitio WordPress original (ruta /original)
 import NavMenu from "./NavMenu.astro";
 import RevolutionSliderAstro from "./RevolutionSliderAstro.astro";
+import RevolutionSliderOriginal from "./RevolutionSliderOriginal.astro";
 import FormularioContacto from "./FormularioContacto.astro";
 import QuienesSomos from "./QuienesSomos.astro";
 import Servicios from "./Servicios.astro";
 import ServiciosSlider from "./legacy/ServiciosSlider.astro";
 
-const { variant = "static" } = Astro.props;
+const { variant = "static", hero = "nuevo" } = Astro.props;
 ---
 
 <header class="bg-white p-4 border-b border-gray-200 sticky top-0 z-50 w-full">
@@ -27,7 +30,7 @@ const { variant = "static" } = Astro.props;
 		<NavMenu />
 	</div>
 </header>
-<RevolutionSliderAstro />
+{hero === "original" ? <RevolutionSliderOriginal /> : <RevolutionSliderAstro />}
 <main class="flex-grow w-full">
 	<section
 		class="bg-gradient-to-r from-logo-principal to-logo-secundario text-white py-20 px-4 text-center w-full relative overflow-hidden"

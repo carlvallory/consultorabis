@@ -1,0 +1,160 @@
+---
+// src/components/RevolutionSliderOriginal.astro
+// Réplica fiel del hero del sitio WordPress original (Revolution Slider 6.2.17,
+// "Corporate_headerNew"), tomada de la copia de web.archive.org del 2023-03-20.
+// Posiciones, tamaños, tiempos y easings salen tal cual de los data-* de cada
+// rs-layer, sobre la grilla original de 1240×500 px. Sirve para mostrarle al
+// cliente la animación "old" junto a la nueva (RevolutionSliderAstro.astro).
+import { Image } from "astro:assets";
+
+// x, y, w, h: data-xy / data-dim del original (px sobre la grilla de 1240×500).
+const layers = [
+    { cls: "orig-1", src: "/content/corporate-03.png", alt: "Banda corporativa 1", x: 370, y: -62, w: 1408, h: 174 },
+    { cls: "orig-2", src: "/content/corporate-02.png", alt: "Banda corporativa 2", x: -455, y: -55, w: 1196, h: 160 },
+    { cls: "orig-3", src: "/content/arrow-black-01.png", alt: "Flecha negra", x: 554, y: 153, w: 129, h: 367 },
+    { cls: "orig-4", src: "/content/arrow-red-01.png", alt: "Flecha roja", x: 555, y: 153, w: 128, h: 152 },
+    { cls: "orig-5", src: "/content/logo-rows-05.png", alt: "Logo", x: 503, y: 127, w: 225, h: 232 },
+    { cls: "orig-6", src: "/content/consultoratexto-06.png", alt: "Consultora BIS", x: 309, y: 348, w: 632, h: 142 },
+];
+---
+
+<div class="orig-hero">
+    <div class="orig-stage">
+        {
+            layers.map((l, i) => (
+                <Image
+                    src={l.src}
+                    alt={l.alt}
+                    class={`orig-layer ${l.cls}`}
+                    width={l.w}
+                    height={l.h}
+                    loading="eager"
+                    densities={[1, 1.5, 2]}
+                    formats={["webp", "avif", "png"]}
+                    style={`left:${l.x}px;top:${l.y}px;width:${l.w}px;height:${l.h}px;z-index:${5 + i};`}
+                    data-x={l.x}
+                    data-y={l.y}
+                    data-w={l.w}
+                />
+            ))
+        }
+    </div>
+</div>
+
+<style>
+    /* Layout "fullwidth" de Revolution Slider: la grilla de 1240×500 queda
+       centrada y, por debajo de 1240 px de ancho, se escala entera. */
+    .orig-hero {
+        --orig-scale: 1;
+        position: relative;
+        width: 100%;
+        height: calc(500px * var(--orig-scale));
+        overflow: hidden;
+        background: #ffffff;
+    }
+
+    .orig-stage {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 1240px;
+        height: 500px;
+        transform: translateX(-50%) scale(var(--orig-scale));
+        transform-origin: top center;
+    }
+
+    .orig-layer {
+        position: absolute;
+        max-width: none;
+        opacity: 0;
+        object-fit: contain;
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const hero = document.querySelector<HTMLElement>(".orig-hero");
+        if (!hero) return;
+
+        const GRID_W = 1240;
+        const GRID_H = 500;
+
+        const getScale = () => Math.min(1, hero.offsetWidth / GRID_W);
+        const setScale = () =>
+            hero.style.setProperty("--orig-scale", String(getScale()));
+
+        // Lee la posición original de una capa (atributos data-*).
+        const geom = (sel: string) => {
+            const el = hero.querySelector<HTMLElement>(sel)!;
+            return {
+                x: Number(el.dataset.x),
+                y: Number(el.dataset.y),
+                w: Number(el.dataset.w),
+            };
+        };
+
+        // Margen entre el borde de la grilla y el del contenedor, en px de grilla.
+        const sideGap = () => (hero.offsetWidth / getScale() - GRID_W) / 2;
+
+        const build = () => {
+            gsap.killTweensOf(".orig-layer");
+            gsap.set(".orig-layer", { x: 0, y: 0, opacity: 0 });
+
+            const tl = gsap.timeline();
+            const l1 = geom(".orig-1");
+            const l2 = geom(".orig-2");
+            const l3 = geom(".orig-3");
+
+            // Tiempos = "st" (inicio) y "sp" (duración) del original, en segundos.
+
+            // corporate-02: entra desde la izquierda (x:left), st 500, sp 2500.
+            tl.fromTo(
+                ".orig-2",
+                { x: -(sideGap() + l2.x + l2.w), opacity: 1 },
+                { x: 0, duration: 2.5, ease: "power2.inOut" },
+                0.5,
+            );
+
+            // corporate-03: entra desde la derecha (x:right), st 1090, sp 2500.
+            tl.fromTo(
+                ".orig-1",
+                { x: sideGap() + GRID_W - l1.x, opacity: 1 },
+                { x: 0, duration: 2.5, ease: "power2.inOut" },
+                1.09,
+            );
+
+            // Flecha negra: sube desde abajo (y:bottom), st 1090, sp 1500;
+            // se desvanece desde st 3980 en 1010 ms.
+            tl.fromTo(
+                ".orig-3",
+                { y: GRID_H - l3.y, opacity: 1 },
+                { y: 0, duration: 1.5, ease: "power2.inOut" },
+                1.09,
+            );
+            tl.to(".orig-3", { opacity: 0, duration: 1.01, ease: "none" }, 3.98);
+
+            // Flecha roja: fundido de entrada st 3300, sp 880; sale en st 5020.
+            tl.to(".orig-4", { opacity: 1, duration: 0.88, ease: "power2.inOut" }, 3.3);
+            tl.to(".orig-4", { opacity: 0, duration: 0.3, ease: "none" }, 5.02);
+
+            // Logo: fundido de entrada st 4220, sp 920 (queda fijo).
+            tl.to(".orig-5", { opacity: 1, duration: 0.92, ease: "power2.inOut" }, 4.22);
+
+            // Texto: fundido de entrada st 5350 (velocidad por defecto, 300 ms).
+            tl.to(".orig-6", { opacity: 1, duration: 0.3, ease: "power2.inOut" }, 5.35);
+
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+                tl.progress(1);
+            }
+        };
+
+        setScale();
+        build();
+
+        // Al cambiar el ancho solo se reescala la grilla; la animación no se
+        // reinicia (los desplazamientos van en px de grilla, que no cambian).
+        window.addEventListener("resize", setScale);
+    });
+</script>
