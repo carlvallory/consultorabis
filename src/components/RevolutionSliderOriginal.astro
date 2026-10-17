@@ -5,6 +5,7 @@
 // Posiciones, tamaños, tiempos y easings salen tal cual de los data-* de cada
 // rs-layer, sobre la grilla original de 1240×500 px. Sirve para mostrarle al
 // cliente la animación "old" junto a la nueva (RevolutionSliderAstro.astro).
+// El alto del contenedor es el del hero nuevo (pedido del cliente, 2026-10-17).
 import { Image } from "astro:assets";
 
 // x, y, w, h: data-xy / data-dim del original (px sobre la grilla de 1240×500).
@@ -42,25 +43,38 @@ const layers = [
 </div>
 
 <style>
-    /* Layout "fullwidth" de Revolution Slider: la grilla de 1240×500 queda
-       centrada y, por debajo de 1240 px de ancho, se escala entera. */
+    /* Alto del contenedor igual al del hero nuevo (RevolutionSliderAstro):
+       1920/775 en desktop y 16/9 en mobile, con mínimos y máximo. La grilla
+       original de 1240×500 se escala entera para llenarlo (casi la misma
+       proporción que 1920/775) y queda centrada. */
     .orig-hero {
         --orig-scale: 1;
         position: relative;
         width: 100%;
-        height: calc(500px * var(--orig-scale));
+        max-width: 1920px;
+        aspect-ratio: 16 / 9;
+        min-height: 300px;
+        max-height: 800px;
+        margin: 0 auto;
         overflow: hidden;
         background: #ffffff;
     }
 
+    @media (min-width: 768px) {
+        .orig-hero {
+            aspect-ratio: 1920 / 775;
+            min-height: 400px;
+        }
+    }
+
     .orig-stage {
         position: absolute;
-        top: 0;
+        top: 50%;
         left: 50%;
         width: 1240px;
         height: 500px;
-        transform: translateX(-50%) scale(var(--orig-scale));
-        transform-origin: top center;
+        transform: translate(-50%, -50%) scale(var(--orig-scale));
+        transform-origin: center center;
     }
 
     .orig-layer {
@@ -81,7 +95,9 @@ const layers = [
         const GRID_W = 1240;
         const GRID_H = 500;
 
-        const getScale = () => Math.min(1, hero.offsetWidth / GRID_W);
+        // La grilla entra entera en el contenedor (puede agrandarse o achicarse).
+        const getScale = () =>
+            Math.min(hero.offsetWidth / GRID_W, hero.offsetHeight / GRID_H);
         const setScale = () =>
             hero.style.setProperty("--orig-scale", String(getScale()));
 
@@ -97,6 +113,7 @@ const layers = [
 
         // Margen entre el borde de la grilla y el del contenedor, en px de grilla.
         const sideGap = () => (hero.offsetWidth / getScale() - GRID_W) / 2;
+        const vertGap = () => (hero.offsetHeight / getScale() - GRID_H) / 2;
 
         const build = () => {
             gsap.killTweensOf(".orig-layer");
@@ -129,7 +146,7 @@ const layers = [
             // se desvanece desde st 3980 en 1010 ms.
             tl.fromTo(
                 ".orig-3",
-                { y: GRID_H - l3.y, opacity: 1 },
+                { y: vertGap() + GRID_H - l3.y, opacity: 1 },
                 { y: 0, duration: 1.5, ease: "power2.inOut" },
                 1.09,
             );
